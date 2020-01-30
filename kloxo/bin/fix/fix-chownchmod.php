@@ -8,11 +8,11 @@ initProgram('admin');
 
 $list = parse_opt($argv);
 
-$server = (isset($list['server'])) ? $list['server'] : 'localhost';
-$select = (isset($list['select'])) ? $list['select'] : 'all';
-$client = (isset($list['client'])) ? $list['client'] : 'all';
+$server = $list['server'] ?? 'localhost';
+$select = $list['select'] ?? 'all';
+$client = $list['client'] ?? 'all';
 
-$nolog  = (isset($list['nolog']))  ? $list['nolog'] : null;
+$nolog  = $list['nolog'] ?? null;
 
 log_cleanup("Fixing Chown and Chmod", $nolog);
 

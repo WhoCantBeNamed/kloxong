@@ -31,6 +31,10 @@ function clearTrafficTable()
 
 function filltraffictable() 
 {
+	$globaldomlist = null;
+	$weblist = null;
+	$mmaillist = null;
+	$timearray = null;
 	global $gbl, $login, $ghtml; 
 	initProgram('admin');
 	$login->loadAllObjects('client');

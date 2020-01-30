@@ -9,11 +9,11 @@ include_once "lib/html/include.php";
 
 $list = parse_opt($argv);
 
-$engine = ($list['engine']) ? $list['engine'] : 'MyISAM';
-$database = (isset($list['database'])) ? $list['database'] : null;
-$table = (isset($list['table'])) ? $list['table'] : null;
-$config = (isset($list['config'])) ? $list['config'] : null;
-$utf8 = (isset($list['utf8'])) ? $list['utf8'] : null;
+$engine = $list['engine'] ?: 'MyISAM';
+$database = $list['database'] ?? null;
+$table = $list['table'] ?? null;
+$config = $list['config'] ?? null;
+$utf8 = $list['utf8'] ?? null;
 
 setMysqlConvert($engine, $database, $table, $config, $utf8);
 
@@ -27,19 +27,19 @@ function setMysqlConvert($engine, $database, $table, $config, $utf8)
 
 	$engine = strtolower($engine);
 
-	$database = ($database) ? $database : '_all_';
-	$table = ($table) ? $table : '_all_';
-	$config = ($config) ? $config : 'yes';
-	$utf8 = ($utf8) ? $utf8 : 'no';
+	$database = $database ?: '_all_';
+	$table = $table ?: '_all_';
+	$config = $config ?: 'yes';
+	$utf8 = $utf8 ?: 'no';
 
 	$pass = slave_get_db_pass();
 
 	//--- the first - to 'disable' skip- and restart mysql
-	
+
 	$cnffile = array('/etc/my.cnf', '/etc/my.cnf.d/my.cnf', '/etc/my.cnf.d/server.cnf');
 
 	$mycnfs = array('/etc/my.cnf.d/my.cnf', '/etc/my.cnf.d/server.cnf', '/etc/my.cnf');
-	
+
 	foreach ($mycnfs as &$mycnf) {
 		if (file_exists($mycnf)) {
 			@exec("sed -i 's/^skip/\;###123###skip/g' {$mycnf}");
@@ -208,7 +208,7 @@ function setMysqlConvert($engine, $database, $table, $config, $utf8)
 	log_cleanup("- MySQL Service restarted");
 
 	exec("sh /script/restart-mysql");
-	
+
 	print("\n* Note: Better reboot after first running this script and then run again\n");
 }
 

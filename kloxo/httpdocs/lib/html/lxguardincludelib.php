@@ -73,11 +73,11 @@ function getTimeFromSysLogString($line)
 	$line = trimSpaces($line);
 	$year = @ date('Y');
 
-	list($month, $day, $time) = explode(" ", $line);
+	[$month, $day, $time] = explode(" ", $line);
 
 	$month = get_num_for_month($month);
 
-	list($hour, $min, $sec) = explode(':' , $time);
+	[$hour, $min, $sec] = explode(':' , $time);
 //	$s = mktime($hour, $min, $sec, monthToInt($month), str_pad($day, 2, 0, STR_PAD_LEFT), $year);
 	$s = @mktime($hour, $min, $sec, $month, $day, $year);
 
@@ -112,7 +112,7 @@ function sshLogString($string, &$list)
 	$match = false;
 
 	foreach($str as $k => $v) {
-		if (strpos($string, $v) !== false) {
+		if (strpos($string, (string) $v) !== false) {
 			$match = true;
 			$access = $k;
 
@@ -175,7 +175,7 @@ function ftpLogString($string, &$list)
 	$match = false;
 
 	foreach($str as $k => $v) {
-		if (strpos($string, $v) !== false) {
+		if (strpos($string, (string) $v) !== false) {
 			$match = true;
 			$access = $k;
 
@@ -229,7 +229,7 @@ function smtpLogString($string, &$list)
 	$match = false;
 
 	foreach($str as $k => $v) {
-		if (strpos($string, $v) !== false) {
+		if (strpos($string, (string) $v) !== false) {
 			$match = true;
 			$access = $k;
 

@@ -1,7 +1,7 @@
 <?php 
 
 $path = __FILE__;
-$dir = dirname(dirname(dirname($path)));
+$dir = dirname($path, 3);
 include_once "$dir/lib/html/includecore.php";
 
 print_time("include");

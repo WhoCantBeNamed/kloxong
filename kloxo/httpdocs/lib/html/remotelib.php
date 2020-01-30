@@ -371,6 +371,7 @@ function send_to_some_server($raddress, $var)
 
 function recall_send_to_some_stream_server($type, $size, $raddress, $var)
 {
+	$fd = null;
 	send_to_some_stream_server($type, $size, $raddress, $var, $fd, true);
 }
 
@@ -851,7 +852,7 @@ function do_local_action($rmt)
 			// workaround for the following php bug:
 			//   http://bugs.php.net/bug.php?id=47948
 			//   http://bugs.php.net/bug.php?id=51329
-			if (is_array($rmt->func) && count($rmt->func) > 0) {
+			if (is_array($rmt->func) && (is_countable($rmt->func) ? count($rmt->func) : 0) > 0) {
 				$class = $rmt->func[0];
 				class_exists($class);
 			}

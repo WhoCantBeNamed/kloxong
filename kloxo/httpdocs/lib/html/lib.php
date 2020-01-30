@@ -59,6 +59,7 @@ function http_is_self_ssl()
 
 function get_other_driver($class, $driverapp)
 {
+	$driver = null;
 	include "../file/driver/rhel.inc";
 
 	$ret = null;
@@ -142,11 +143,11 @@ function file_put_between_comments($username, $stlist, $endlist, $startstring, $
 		}
 	}
 
-	if (count($outlist) > 0) {
+	if (($outlist === null ? 0 : count($outlist)) > 0) {
 		$outstring = implode("\n", $outlist);
 	}
 
-	if (count($afterlist) > 0) {
+	if (($afterlist === null ? 0 : count($afterlist)) > 0) {
 		$afterstring = implode("\n", $afterlist);
 	}
 
@@ -206,6 +207,7 @@ function db_get_count($table, $query)
 
 function db_del_value($table, $nname)
 {
+	$value = null;
 	$sql = new Sqlite(null, $table);
 	$del = $sql->delRow($nname, $value);
 
@@ -274,6 +276,7 @@ function lxGetTimeFromString($line)
 
 function recursively_get_file($dir, $file)
 {
+	$l = null;
 	if (lxfile_exists("$dir/$file")) {
 		return "$dir/$file";
 	}
@@ -303,7 +306,7 @@ function get_com_ob($obj)
 
 function make_hidden_if_one($dlist)
 {
-	if (count($dlist) === 1) {
+	if ((is_countable($dlist) ? count($dlist) : 0) === 1) {
 		return array('h', getFirstFromList($dlist));
 	}
 
@@ -391,7 +394,7 @@ function get_total_files_in_directory($dir)
 	$dir = expand_real_root($dir);
 	$list = lscandir_without_dot($dir);
 
-	return count($list);
+	return is_countable($list) ? count($list) : 0;
 }
 
 function convert_favorite()
@@ -401,6 +404,7 @@ function convert_favorite()
 
 function fix_meta_character($v)
 {
+	$nv = null;
 	for ($i = 0; $i < strlen($v); $i++) {
 		if (ord($v[$i]) > 128) {
 			$nv[] = strtolower(urlencode($v[$i]));
@@ -425,6 +429,7 @@ function changeDriver($server, $class, $pgm)
 
 function changeDriverFunc($server, $class, $pgm)
 {
+	$driver = null;
 	global $login;
 
 	$server = $login->getFromList('pserver', $server);
@@ -685,13 +690,13 @@ function check_if_port_on($port)
 
 		//	if (strpos($out[0], '(pid ') !== false) {
 		//	if (strpos($out[0], 'running') !== false) {
-			if (count($out) > 0) {
+			if ((is_countable($out) ? count($out) : 0) > 0) {
 				$ret = true;
 			}
 		} elseif (strpos($v, 'pgrep') !== false) {
 			exec($v, $out, $ret);
 
-			if (count($out) > 0) {
+			if ((is_countable($out) ? count($out) : 0) > 0) {
 				return true;
 			}
 		} else {
@@ -1050,6 +1055,7 @@ function get_double_hex($i)
 
 function merge_array_object_not_deleted($array, $object)
 {
+	$nl = null;
 	$ret = null;
 
 	if (is_array($array)) {
@@ -1120,7 +1126,7 @@ function check_if_many_server()
 	$res = $sql->getTable(array('nname'));
 	$rs = get_namelist_from_arraylist($res);
 
-	if (count($rs) > 1) {
+	if ((is_countable($rs) ? count($rs) : 0) > 1) {
 		return true;
 	}
 
@@ -1158,7 +1164,7 @@ function change_config($file, $var, $val)
 	}
 
 	if (!$match) {
-		$list[] = "$var=\"$val\"";
+		$list = (array) $list;
 	}
 
 	lfile_put_contents($file, implode("\n", $list));
@@ -1259,6 +1265,7 @@ function upload_file_to_db($dbtype, $dbhost, $dbuser, $dbpassword, $dbname, $fil
 
 function calculateRealTotal($inout)
 {
+	$realtotalinout = null;
 	foreach ($inout as $k => $v) {
 		$sum = 0;
 
@@ -1314,6 +1321,7 @@ function testAllServersWithMessage()
 
 function testAllServers()
 {
+	$e = null;
 	$sq = new Sqlite(null, 'pserver');
 	$res = $sq->getTable(array('nname'));
 	$nlist = get_namelist_from_arraylist($res);
@@ -1358,6 +1366,7 @@ function exec_with_all_closed_output($cmd)
 // Convert Com to Php Array.
 function convertCOMarray($array)
 {
+	$res = null;
 	foreach ($array as $v) {
 		$res[] = "$v";
 	}
@@ -1367,11 +1376,12 @@ function convertCOMarray($array)
 
 function mycount($olist)
 {
-	return count($olist);
+	return is_countable($olist) ? count($olist) : 0;
 }
 
 function do_actionlog($login, $object, $action, $subaction)
 {
+	$res = null;
 	global $gbl;
 
 	if ($subaction === 'customermode') {
@@ -1617,6 +1627,7 @@ function get_license_resource()
 
 function cp_fileserv_list($root, $list)
 {
+	$res = null;
 	foreach ($list as $l) {
 		$fp = "$root/$l";
 		$res[$fp] = cp_fileserv($fp);
@@ -1627,6 +1638,7 @@ function cp_fileserv_list($root, $list)
 
 function cp_fileserv($file)
 {
+	$res = null;
 	global $sgbl;
 
 	$path = $sgbl->__path_serverfile;
@@ -2086,6 +2098,7 @@ function rrd_graph_vps($type, $file, $time)
 
 function rrd_graph_server($type, $list, $time)
 {
+	$arg = null;
 	global $sgbl, $login;
 	global $global_dontlogshell, $global_shell_error;
 
@@ -2265,6 +2278,7 @@ function get_variable($list)
 
 function parse_opt($argv)
 {
+	$ret = null;
 	unset($argv[0]);
 
 	if (!$argv) {
@@ -2576,6 +2590,7 @@ function createRestartFile($servar)
 
 function getLastFromList(&$list)
 {
+	$l = null;
 	if (!$list) {
 		return null;
 	}
@@ -2615,6 +2630,8 @@ function getBestLocationFromServer($server, $list)
 
 function get_best_location($list)
 {
+	$normallist = null;
+	$out = null;
 	dprintr($list);
 
 	$lvmlist = null;
@@ -2648,6 +2665,7 @@ function get_best_location($list)
 
 function vg_complete()
 {
+	$res = null;
 	if (!lxfile_exists("/usr/sbin/vgdisplay")) {
 		return;
 	}
@@ -2845,10 +2863,11 @@ function getFullVersionList($till = null)
 
 function getVersionList($till = null)
 {
+	$nnlist = null;
 	$list = getFullVersionList($till);
 
 	foreach ($list as $k => $l) {
-		if (preg_match("/2$/", $l) && ($k !== count($list) - 1)) {
+		if (preg_match("/2$/", $l) && ($k !== (is_countable($list) ? count($list) : 0) - 1)) {
 			continue;
 		}
 
@@ -2914,7 +2933,7 @@ function download_source($file)
 
 function download_remote($url, $user, $pass, $localfile = null)
 {
-	list($protocol, $rest) = explode("://", $url);
+	[$protocol, $rest] = explode("://", $url);
 
 	switch ($protocol) {
 		case 'ftp':
@@ -3033,6 +3052,8 @@ function incrementVar($table, $var, $min, $increment)
 
 function se_submit($contact, $dom, $email)
 {
+	$enginelist = null;
+	$var = null;
 	$tmpfile = lx_tmp_file("se_submit_$dom");
 
 	include "./sesubmit/engines.php";
@@ -3314,6 +3335,7 @@ function change_underscore($var)
 
 function getIpaddressList($master, $servername)
 {
+	$ret = null;
 	$sql = new Sqlite($master, 'ipaddress');
 
 	if (!$servername) {
@@ -3864,6 +3886,7 @@ function MonthList()
 
 function readfirstline($file)
 {
+	$fp = null;
 	$firstline = fgets($file);
 	fclose($fp);
 
@@ -3872,6 +3895,7 @@ function readfirstline($file)
 
 function getNotexistingFile($dir, $file)
 {
+	$i = null;
 	foreach (range(1, 100) as $i) {
 		if (!lxfile_exists($dir . "/" . $file . "-" . $i)) {
 			return $dir . "/" . $file . "-" . $i;
@@ -3892,7 +3916,7 @@ function createrows($list)
 	$fields = lx_array_merge(array(get_default_fields(), $list));
 
 	if (array_search_bool("syncserver", $fields)) {
-		$fields[] = 'oldsyncserver';
+		$fields = (array) $fields;
 		$fields[] = 'olddeleteflag';
 	}
 
@@ -4025,6 +4049,7 @@ function add_http_if_not_exist($url)
 
 function getAllIpaddress()
 {
+	$list = null;
 	$mydb = new Sqlite(null, 'ipaddress');
 	$res = $mydb->getTable(array('ipaddr', 'nname'));
 
@@ -4340,6 +4365,7 @@ function checkClusterDiskQuota()
 
 function find_closest_mirror()
 {
+	$hop = null;
 	// TODO LxCenter: No call to this function found.
 	dprint("find_closest_mirror htmllib>lib>lib.php\n");
 
@@ -4535,7 +4561,7 @@ function trafficGetIndividualObjectTotal($list, $firstofmonth, $today, $name)
 	$tot = 0;
 
 	foreach ((array)$list as $t) {
-		list($nname, $oldtime, $newtime) = explode(":", $t->nname);
+		[$nname, $oldtime, $newtime] = explode(":", $t->nname);
 
 		if ($oldtime >= $firstofmonth && $oldtime < $today) {
 			dprint(@ strftime("%c", "$oldtime") . ": ");
@@ -4602,6 +4628,7 @@ function findServerTraffic()
 
 function createMultipLeVps($param)
 {
+	$sgbl = null;
 	global $$sgbl;
 
 	$adminpass = $param['vps_admin_password_f'];
@@ -4634,6 +4661,9 @@ function setup_ssh_channel($source, $destination, $actualname)
 
 function exec_vzmigrate($vpsid, $newserver, $ssh_port)
 {
+	$out = null;
+	$err = null;
+	$ret = null;
 	global $global_shell_error;
 
 	$username = '__system__';

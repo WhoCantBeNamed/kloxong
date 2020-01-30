@@ -14,7 +14,7 @@ include_once "lib/html/include.php";
 //}
 
 $pass = slave_get_db_pass();
-$salt = sha1(rand());
+$salt = sha1(random_int(0, mt_getrandmax()));
 
 if(isRpmInstalled('qmail-toaster')) {
 	print("Using qmail-toaster - fix '/home/vpopmail/etc/vpopmail.mysql'\n");

@@ -4,10 +4,10 @@
 require "functions.php";
 require "engines.php";
 
-if(@ereg($getext,$getext) == false)
+if(@preg_match('#' . preg_quote($getext, '#') . '#m',$getext) == false)
 	$getext = "(:)";
 
-if(@ereg($ignoredir,$ignoredir) == false)
+if(@preg_match('#' . preg_quote($ignoredir, '#') . '#m',$ignoredir) == false)
 	$ignoredir = "(:)";
 
 $domain = $_REQUEST['domain'];

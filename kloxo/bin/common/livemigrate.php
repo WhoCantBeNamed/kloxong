@@ -6,6 +6,8 @@ switchserver_main();
 
 function switchserver_main()
 {
+	$object = null;
+	$param = null;
 	global $argc, $argv;
 	global $gbl, $sgbl, $login, $ghtml; 
 
@@ -70,7 +72,7 @@ function switchserver_main()
 
 		$res = rl_exec_get(null, $oldserver, "exec_vzmigrate", array($object->vpsid, $actualserver, $ssh_port));
 
-		list($ret, $error)  = $res;
+		[$ret, $error]  = $res;
 
 
 		if ($ret !== 0) {

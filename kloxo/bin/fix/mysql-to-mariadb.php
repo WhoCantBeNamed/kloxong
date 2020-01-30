@@ -18,7 +18,7 @@ if (strpos($mysqlbranch, "MariaDB") !== false) {
 	echo "* Already '{$mysqlbranch}' installed\n";
 } else {
 	exec("yum list|grep MariaDB", $out, $ret);
-	
+
 //	if ($ret) {
 //		echo "- No repo for MariaDB.\n";
 //		echo "  Open '/etc/yum.repos.d/mratwork.repo and change 'enable=0' to 'enable=1'\n";
@@ -34,20 +34,20 @@ if (strpos($mysqlbranch, "MariaDB") !== false) {
 			system("yum remove mysql*.i686 -y");
 		}
 
-		
+
 		$out2 = shell_exec("rpm -qa|grep {$mysqlbranch}");
 
 		$arr = explode("\n", $out2);
 
 		echo "- Remove MySQL packages\n";
 		system("'cp' -f /etc/my.cnf /etc/my.cnf._bck_");
-		
+
 		foreach ($arr as &$o) {
 			if (strpos($o, "-mysql") !== false) { continue; }
 		//	if (strpos($o, "mysqlclient") !== false) { continue; }
 			system("rpm -e {$o} --nodeps");
 		}
-		
+
 		// MR -- may trouble if remove for mysqli extension
 	//	system("yum install mysqlclient* -y");
 

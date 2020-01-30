@@ -21,10 +21,10 @@ if (isset($par['value'])) {
 	$param = strtolower($par['value']);
 }
 
-$client = (isset($par['client'])) ? $par['client'] : null;
+$client = $par['client'] ?? null;
 $clist = array();
 
-$domain = (isset($par['domain'])) ? $par['domain'] : null;
+$domain = $par['domain'] ?? null;
 $domlist = array();
 
 $nolog = false;

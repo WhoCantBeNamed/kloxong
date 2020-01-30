@@ -36,6 +36,7 @@ function pmaster_main()
 
 function add_line_to_master_mycnf()
 {
+	$ll = null;
 	global $gbl, $sgbl, $login, $ghtml; 
 
 	$dbf = $sgbl->__var_dbf;

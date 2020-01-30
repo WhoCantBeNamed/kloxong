@@ -52,6 +52,7 @@ function ip_blocked($client)
 
 function checkAttempt()
 {
+	$ip = null;
 	global $gbl, $sgbl, $login, $ghtml; 
 
 	$match = 0;

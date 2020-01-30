@@ -48,6 +48,8 @@ function print_logout()
 
 function print_header()
 {
+	$alist = null;
+	$k = null;
 	global $gbl, $sgbl, $login, $ghtml; 
 	$lightskincolor = $login->getLightSkinColor();
 	createHeaderData();
@@ -56,6 +58,7 @@ function print_header()
 <!-- <div id=statusbar style='background: #<?= $lightskincolor ?>; scroll: auto; height: 26px; width:100%; border-bottom:4px solid #b1cfed; margin: 2px; vertical-align: top; text-align: top'> -->
 <div id=statusbar style='background: #<?= $lightskincolor ?>; scroll: auto; height: 26px; width:100%; border-bottom:4px solid #ddddff; vertical-align: top; text-align: top'>
 <?php
+$alist = (array) $alist;
 $alist[] = "a=show";
 $alist = $login->createShowAlist($alist);
 /*

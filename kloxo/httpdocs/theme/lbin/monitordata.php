@@ -9,6 +9,8 @@ monitor_remote_main();
 
 function monitor_remote_main()
 {
+	$array = null;
+	$parray = null;
 	global $gbl, $sgbl, $login, $ghtml; 
 	ob_start();
 

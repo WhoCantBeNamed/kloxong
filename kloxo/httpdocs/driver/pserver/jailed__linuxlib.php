@@ -1,8 +1,8 @@
 <?php 
 
-class jailed__linux extends lxDriverClass
+class jailed__linux extends \lxDriverClass
 {
-	function dbactionUpdate($subaction) {
-	}
-
+    function dbactionUpdate($subaction)
+    {
+    }
 }

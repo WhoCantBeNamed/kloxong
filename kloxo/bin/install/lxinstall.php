@@ -74,6 +74,7 @@ function lxinstall_main()
 
 function lxinstall_package($package)
 {
+	$gl_execute_cmd = null;
 	$oldir = getcwd();
 	chdir("/usr/local/kloxo/src/$package-current");
 	

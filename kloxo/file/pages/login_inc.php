@@ -41,7 +41,7 @@ if (!$cgi_forgotpwd) {
 
 	$ghtml->print_message();
 
-	$_SESSION['frm_token'] = mt_rand();
+	$_SESSION['frm_token'] = random_int(0, mt_getrandmax());
 ?>
 <!--- include start --->
 

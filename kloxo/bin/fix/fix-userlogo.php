@@ -8,8 +8,8 @@ initProgram('admin');
 
 $list = parse_opt($argv);
 
-$select = (isset($list['select'])) ? $list['select'] : 'all';
-$nolog  = (isset($list['nolog'])) ? $list['nolog'] : null;
+$select = $list['select'] ?? 'all';
+$nolog  = $list['nolog'] ?? null;
 
 setFixUserlogo($select);
 
@@ -49,13 +49,13 @@ function setFixUserlogo($select)
 function setFixUserlogoDefaultPages()
 {
 	$list = array('cp', 'default', 'disable', 'webmail');
-	
+
 	foreach($list as $k => $l) {
 		system("'cp' -rf /home/kloxo/httpd/user-logo.png /home/kloxo/httpd/{$l}/images/user-logo.png");
 		system("'cp' -rf /home/kloxo/httpd/user-logo.png /home/kloxo/httpd/{$l}/images/logo.png");
 		log_cleanup("- User logo for default pages copy to -> /home/kloxo/httpd/{$l}/images/logo.png", $nolog);
 	}
-	
+
 	system("'cp' -rf /home/kloxo/httpd/user-logo.png /usr/local/lxlabs/kloxo/httpdocs/login/images/user-logo.png");
 	system("'cp' -rf /home/kloxo/httpd/user-logo.png /usr/local/lxlabs/kloxo/httpdocs/login/images/logo.png");
 	log_cleanup("- User logo copy to -> /usr/local/lxlabs/kloxo/httpdocs/login/images/user-logo.png", $nolog);
@@ -64,10 +64,10 @@ function setFixUserlogoDefaultPages()
 function setFixUserlogoDomainPages()
 {
 	global $gbl, $sgbl, $login, $ghtml;
-	
+
 	$login->loadAllObjects('client');
 	$list = $login->getList('client');
-	
+
 	foreach($list as $c) {
 		$cinfo = posix_getpwnam($c->nname);
 

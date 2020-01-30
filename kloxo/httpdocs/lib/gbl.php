@@ -2,6 +2,6 @@
 
 include_once "lib/php/gbllib.php";
 
-class Gbl extends Gbllib {
-
+class Gbl extends \Gbllib
+{
 }

@@ -132,7 +132,7 @@ function __cmd_desc_simplelist($p)
 
 		$list = $parent->getList($resource);
 		if (isset($p['v-filter'])) {
-			list($var, $val) = explode(":", $p['v-filter']);
+			[$var, $val] = explode(":", $p['v-filter']);
 			foreach($list as $k => $l) {
 				if ($l->$var !== $val) {
 					unset($list[$k]);

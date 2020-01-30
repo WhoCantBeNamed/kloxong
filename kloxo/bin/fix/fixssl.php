@@ -141,7 +141,7 @@ foreach($slist as $b) {
 		} else {
 			$keyc = $b->text_key_content;
 			$crtc = $b->text_crt_content;
-			$cac = ($b->text_ca_content) ? $b->text_ca_content : '';
+			$cac = $b->text_ca_content ?: '';
 			$pemc = "{$keyc}\n{$crtc}\n{$cac}";
 
 			$list = array('key' => $keyc, 'crt' => $crtc, 'ca' => $cac);

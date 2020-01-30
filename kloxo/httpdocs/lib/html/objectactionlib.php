@@ -100,12 +100,13 @@ function webcommandline_main()
 
 function json_print_result($opt, $result)
 {
+	$ret = null;
 	if (isset($opt['output-type']) && $opt['output-type'] === 'json') {
 		$out = array();
 		$out['message'] = "success";
 		$out['result'] = $result;
 		$out['return'] = "success";
-		$out = json_encode($out);
+		$out = json_encode($out, JSON_THROW_ON_ERROR);
 	} else {
 		foreach($result as $k => $l) {
 			$ret[] = "[$k]={$l}";
@@ -125,7 +126,7 @@ function json_print($type, $opt, $message)
 		$out = array();
 		$out['message'] = $message;
 		$out['return'] = $type;
-		$out = json_encode($out);
+		$out = json_encode($out, JSON_THROW_ON_ERROR);
 	} else {
 		$out = $message;
 	}
@@ -306,6 +307,7 @@ function get_v_descr($stuff, $v = null)
 
 function createPrincipleObject()
 {
+	$alist = null;
 	global $gbl, $sgbl, $login, $ghtml; 
 
 	$object = $login;
@@ -333,7 +335,7 @@ function createPrincipleObject()
 
 		foreach($p as $k => $v) {
 			$__tparent = $object;
-			
+
 			if (isset($v['nname'])) {
 				$object = $object->getFromList($v['class'], $v['nname']);
 				$sing = false;
@@ -371,23 +373,23 @@ function createPrincipleObject()
 
 				$navig[$n]['frm_action'] = 'list';
 				$navigmenu[$n] = array('list', null);
-				
+
 				for($i = 0; $i <= ($k - 1); $i++) {
 					$navig[$n]['frm_o_o'][$i] = $p[$i];
 				}
 
 				$navig[$n]['frm_o_cname'] = $object->getClass();
-				
+
 				// Hack bloody hack.. This should be done the other way. getFiltervariable needs the navig to be set.
 				$gbl->__navig = $navig;
 				$gbl->__navigmenu = $navigmenu;
-				
+
 				$n++;
 			}
 
 			if (!$sing && ($object->createShowAlist($alist) || $object->createShowPropertyList($alist) || $object->createShowClist("") || $object->createShowSclist())) {
 				// Skip the last one, but only if it is a 'show'. If 'show', the last object is the object that is being displayed, and shouldn't appear in history.
-				if (($k === count($p) - 1) && ($ghtml->frm_action === 'show')) {
+				if (($k === (is_countable($p) ? count($p) : 0) - 1) && ($ghtml->frm_action === 'show')) {
 					break;
 				}
 
@@ -397,11 +399,11 @@ function createPrincipleObject()
 
 				$navig[$n]['frm_action'] = 'show';
 				$navigmenu[$n] = array('show', $object);
-				
+
 				for($i = 0; $i <= $k; $i++) {
 					$navig[$n]['frm_o_o'][$i] = $p[$i];
 				}
-				
+
 				$n++;
 			}
 		}
@@ -437,6 +439,11 @@ function createPrincipleObject()
 
 function do_desc_update($object, $subaction, $param)
 {
+	$nparam = null;
+	$dclass = null;
+	$dk = null;
+	$ddclass = null;
+	$ddk = null;
 	global $gbl, $sgbl, $login, $ghtml; 
 	$class = lget_class($object);
 
@@ -543,6 +550,13 @@ function do_desc_update($object, $subaction, $param)
 
 function do_desc_add($object, $class, $param)
 {
+	$dclass = null;
+	$dk = null;
+	$ddclass = null;
+	$ddk = null;
+	$nparam = null;
+	$olist = null;
+	$nolist = null;
 	global $gbl, $sgbl, $login, $ghtml; 
 
 	$object->preAdd($object, $class, $param);

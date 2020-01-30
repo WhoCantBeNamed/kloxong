@@ -1,7 +1,6 @@
 <?php 
 
-class sslCert__sync extends lxDriverClass
+class sslCert__sync extends \lxDriverClass
 {
-
 }
 

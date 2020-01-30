@@ -13,28 +13,28 @@ function apply_correction($link, $path, $domain)
 {
 	$link = trim($link);
 
-	if(eregi("^(https://)",$link))
+	if(preg_match('#^(https:\/\/)#mi',$link))
 		return false;
 
-	$path = eregi_replace("/$","",$path);
+	$path = preg_replace('#\/$#mi',"",$path);
 
-	if(eregi("^(http://)",$link)){
-		if(!ereg("(.*)($domain)(.*)",$link))
+	if(preg_match('#^(http:\/\/)#mi',$link)){
+		if(!preg_match("(.*)($domain)(.*)",$link))
 			return false;
 
-		return eregi_replace("(http://)(www\.)?($domain)","",$link);
+		return preg_replace("(http://)(www\.)?($domain)","",$link);
 	}
 	else{
-		if(!ereg("(^(\.{2}))|(^/)",$link)){
+		if(!preg_match('#(^(\.{2}))|(^\/)#m',$link)){
 			return $path."/".$link;
 		}
 
-		if(ereg("^/",$link)){
+		if(preg_match('#^\/#m',$link)){
 			return $link;
 		}
 
 // time to assume that it begins with ../ or ..
-		$link = ereg_replace("^(\.\.)(/?)","",$link);
+		$link = preg_replace('#^(\.\.)(\/?)#m',"",$link);
 			$path = substr($path,0,strrpos($path,"/"));
 
 			return apply_correction($link,$path,$domain);
@@ -108,22 +108,22 @@ function get_links($page, $domain, &$links)
 		else
 			$link = @str_replace("'"," ",@str_replace('"'," ",@substr($page_,$href_pos+5,$np-$href_pos-5)));
 
-		if(ereg("\?+",$link))
+		if(preg_match('#\?+#m',$link))
 			$link = @substr($link,0,strpos($link,"?"));
 
-		if(ereg("^((javascript:)|(ftp://)|(mailto:))",$link))
+		if(preg_match('#^((javascript:)|(ftp:\/\/)|(mailto:))#m',$link))
 			continue;
 
-		if(($link_ = @stristr($link,$domain)) == false)
+		if(($link_ = @stristr($link,(string) $domain)) == false)
 			if(($link_ = apply_correction($link, $path, $domain)) == false)
 				continue;
 
-		$link_ = eregi_replace("^(www\.)?($domain)","",$link_);
+		$link_ = preg_replace("^(www\.)?($domain)","",$link_);
 
 		if(@my_in_array("http://$domain$link_",$links) == true)
 			continue;
 
-		if(ereg("((\.)($getext))$",$link_) && !ereg("(/)($ignoredir)(/)",$link_))
+		if(preg_match("((\.)($getext))$",$link_) && !preg_match("(/)($ignoredir)(/)",$link_))
 			get_links($link_,$domain,$links);
 	}
 }
@@ -137,7 +137,10 @@ function no_index()
 
 function find_page($location)
 {
-        $pages = array(
+        $domain = null;
+								$t_ = null;
+								$page = null;
+								$pages = array(
                 "index.html",
                 "index.htm",
                 "index.shtml",
@@ -166,6 +169,8 @@ function find_page($location)
 
 function get_index($domain)
 {
+	$t_ = null;
+	$page = null;
 	$pages = array(
 		"index.html",
 		"index.htm",

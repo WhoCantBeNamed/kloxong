@@ -1,13 +1,14 @@
 <?php 
 
 $path = __FILE__;
-$dir = dirname(dirname(dirname($path)));
+$dir = dirname($path, 3);
 include_once "$dir/lib/html/include.php";
 
 // print($dir . "<br>");
 
 function parse_etc_mime()
 {
+	$res = null;
 	$list = lfile_trim("/etc/mime.types");
 
 	foreach($list as $s) {
@@ -78,7 +79,7 @@ $file = curl_general_get("http://$requestclean");
 $pinfo = pathinfo($request);
 // MR -- mod to prevent error message
 // $ext = $pinfo['extension'];
-$ext = isset($pinfo['extension']) ? $pinfo['extension'] : '';
+$ext = $pinfo['extension'] ?? '';
 
 // print_r($pinfo);
 // print("<br>");

@@ -44,6 +44,8 @@ function os_getLoadAvg($flag = false)
 
 function os_fix_fstab()
 {
+	$out = null;
+	$mount = null;
 	$list = lfile_trim("/etc/fstab");
 
 	foreach($list as $l) {
@@ -134,6 +136,7 @@ function os_get_home_dir($user)
 
 function os_get_allips()
 {
+	$iplist = null;
 	// the trick for apache when behind adsl/modem
 
 	if (lxfile_exists("/home/ipalloc/webiplist")) {
@@ -183,6 +186,7 @@ function getIPs_from_ipaddr($withV6 = true)
 // back to use mimic because possibility trouble on slave 
 function getIPs_from_ifcfg()
 {
+	$r = null;
 	$p = '/etc/sysconfig/network-scripts/';
 	$l = lscandir($p);
 
@@ -234,6 +238,7 @@ function os_kill_process_user($username)
 
 function os_create_default_slave_driver_db()
 {
+	$a = null;
 	$a['web'] = "apache";
 	$a['webcache'] = "none";
 	$a['dns'] = "bind";

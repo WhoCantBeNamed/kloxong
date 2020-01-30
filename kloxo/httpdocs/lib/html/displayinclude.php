@@ -19,7 +19,7 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 $path = __FILE__;
-$dir = dirname(dirname(dirname($path)));
+$dir = dirname($path, 3);
 include_once "$dir/lib/html/includecore.php";
 include_once "$dir/theme/html.php";
 include_once "$dir/lib/html/include.php";

@@ -57,6 +57,8 @@ function find_cpuusage()
 
 function interfacetraffic_main()
 {
+	$total = null;
+	$stringa = null;
 	global $gbl, $sgbl, $login, $ghtml; 
 
 	if (!lxfile_exists("$sgbl->__path_program_etc/xeninterface.list")) {
@@ -139,6 +141,12 @@ function get_bytes_for_interface($l)
 
 function iptraffic_main()
 {
+	$sourcelist = null;
+	$dstlist = null;
+	$incoming = null;
+	$vpsoutgoing = null;
+	$vpsincoming = null;
+	$stringa = null;
 	global $gbl, $sgbl, $login, $ghtml; 
 	global $global_dontlogshell;
 
@@ -272,7 +280,7 @@ function get_vpsid_from_ipaddress($ip)
 	foreach($list as $l) {
 		$l = trimSpaces($l);
 		if (csa($l, $ip)) {
-			list($vpsid) = explode(" ", $l);
+			[$vpsid] = explode(" ", $l);
 			return $vpsid;
 		}
 	}

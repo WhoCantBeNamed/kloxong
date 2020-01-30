@@ -49,6 +49,8 @@ function collectquota_main()
 
 function storeinGblvariables()
 {
+	$trafficlist = null;
+	$total = null;
 	global $gbl, $sgbl, $login, $ghtml; 
 
 	$login->loadAllObjects('client');
@@ -111,7 +113,7 @@ function storeinGblvariables()
 		$list = get_namelist_from_objectlist($domt);
 		$total[$domain->getClName()] = trafficGetIndividualObjectTotal($domt, $firstofmonth, $today, $domain->nname);		
 
-		list($month, $year) = get_last_month_and_year();
+		[$month, $year] = get_last_month_and_year();
 		$last_traffic = DomaintrafficHistory::getMonthTotal($domt, $month, $year, domaintraffichistory::getExtraVar()); 
 		if (!isset($sgbl->__var_traffic_last_usage)) {
 			$sgbl->__var_traffic_last_usage = null;

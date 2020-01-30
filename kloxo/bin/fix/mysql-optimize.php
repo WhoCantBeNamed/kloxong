@@ -10,7 +10,7 @@ $list = parse_opt($argv);
 
 $select = strtolower($list['select']);
 
-$database = (isset($list['database'])) ? $list['database'] : null;
+$database = $list['database'] ?? null;
 
 setMysqlOptimize($select, $database);
 
@@ -18,11 +18,12 @@ setMysqlOptimize($select, $database);
 
 function setMysqlOptimize($select, $database = null)
 {
+	$dbname = null;
 	global $gbl, $sgbl, $login, $ghtml;
 
 	log_cleanup("Mysql Check/Repair/Optimize/Upgrade");
 
-	$database = ($database) ? $database : "_all_";
+	$database = $database ?: "_all_";
 
 	$pass = slave_get_db_pass();
 

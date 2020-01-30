@@ -7,6 +7,12 @@ include_once "lib/html/displayinclude.php";
 
 function __ac_desc_desktop($object)
 {
+	$path = null;
+	$post = null;
+	$_t_file = null;
+	$_t_name = null;
+	$_t_image = null;
+	$__t_identity = null;
 	global $gbl, $sgbl, $login, $ghtml;
 
 	$skindir = $login->getSkinDir();
@@ -142,6 +148,7 @@ function __ac_desc_updateshow($object)
 
 function print_customer_mode($object)
 {
+	$col = null;
 	global $gbl, $sgbl, $login, $ghtml;
 
 	$skin_color = $login->getSkinColor();
@@ -164,6 +171,12 @@ function print_customer_mode($object)
 
 function __ac_desc_show($object)
 {
+	$prlist = null;
+	$showalist = null;
+	$advanced = null;
+	$nnalist = null;
+	$acalist = null;
+	$aalist = null;
 	global $gbl, $sgbl, $login, $ghtml;
 
 	print_time("show_select");
@@ -465,6 +478,9 @@ function search_url_in_array($url, $alist)
 
 function compare_action_urls($src, $dst)
 {
+	$path = null;
+	$srcpost = null;
+	$dstpost = null;
 	global $gbl, $sgbl, $login, $ghtml;
 
 	$src = strtolower("display.php?$src");
@@ -495,6 +511,7 @@ function compare_action_urls($src, $dst)
 
 function __ac_desc_graph($object)
 {
+	$alist = null;
 	global $gbl, $sgbl, $login, $ghtml;
 
 	$subaction = $ghtml->frm_subaction;
@@ -575,15 +592,17 @@ function __ac_desc_graph($object)
 
 function showParentProperty($object)
 {
+	$nalist = null;
 	global $gbl, $sgbl, $login, $ghtml;
 
-	$nalist[] = "a=show";
+	$nalist = (array) $nalist;
 	$object->createShowPropertyList($nalist);
 	$ghtml->print_tab_block($nalist);
 }
 
 function do_select_list($object, $sclist)
 {
+	$string = null;
 	global $gbl, $sgbl, $login, $ghtml;
 
 	$class = lget_class($object);
@@ -591,7 +610,7 @@ function do_select_list($object, $sclist)
 
 	foreach ($sclist as $k => $s) {
 		$cg = $ghtml->frm_o_o;
-		$n = count($cg);
+		$n = is_countable($cg) ? count($cg) : 0;
 		$cg[$n]['frm_o_o']['class'] = $k;
 		$string[] = $ghtml->object_variable_startblock($object, $class, "{$desc[2]}");
 		$string[] = $ghtml->object_inherit_classpath();
@@ -726,6 +745,7 @@ function check_for_license()
 
 function __ac_desc_list($object, $cname = null)
 {
+	$vlist = null;
 	global $gbl, $sgbl, $login, $ghtml;
 
 	if (!$cname) {
@@ -910,6 +930,7 @@ function __ac_desc_Update($object)
 
 function security_check($oldvlist, $param)
 {
+	$tmpvlist = null;
 	global $login;
 
 	foreach ((array)$oldvlist as $k => $v) {
@@ -977,6 +998,7 @@ function do_search($object, $cname)
 
 function __ac_desc_UpdateForm($object)
 {
+	$prlist = null;
 	global $gbl, $sgbl, $login, $ghtml;
 
 	if (!$object) {
@@ -1051,6 +1073,8 @@ function __ac_desc_UpdateForm($object)
 
 function do_updateform($object, $subaction)
 {
+	$string = null;
+	$ret = null;
 	global $gbl, $sgbl, $login, $ghtml;
 
 	$class = lget_class($object);
@@ -1123,7 +1147,7 @@ function do_updateform($object, $subaction)
 			return;
 		}
 
-		$string[] = $ghtml->object_variable_startblock($object, null, $title);
+		$string = (array) $string;
 		$string[] = $ghtml->object_inherit_classpath();
 		$ret['variable'] = $vlist;
 
@@ -1206,6 +1230,7 @@ function check_for_select_one($param)
 
 function __ac_desc_continue($object)
 {
+	$string = null;
 	global $gbl, $sgbl, $login, $ghtml;
 
 	$cname = $ghtml->frm_o_cname;
@@ -1239,7 +1264,7 @@ function __ac_desc_continue($object)
 
 	$ghtml->print_message();
 
-	$string[] = $ghtml->object_variable_startblock($object, $cname, "Continue Add $cname");
+	$string = (array) $string;
 
 	$string[] = $ghtml->object_inherit_classpath();
 	$string[] = $ghtml->object_variable_hidden("frm_o_cname", $cname);
@@ -1320,6 +1345,7 @@ function __ac_desc_addform($object)
 
 function do_addform($object, $class, $dttype = null, $notitleflag = false)
 {
+	$string = null;
 	global $gbl, $sgbl, $login, $ghtml;
 
 	$gbl->setSessionV("lx_add_return_url", "/display.php?" . $ghtml->get_get_from_current_post(null));
@@ -1332,7 +1358,7 @@ function do_addform($object, $class, $dttype = null, $notitleflag = false)
 	} else {
 		$title = "Add $cdesc";
 	}
-	$string[] = $ghtml->object_variable_startblock($object, $class, $title);
+	$string = (array) $string;
 
 	$string[] = $ghtml->object_inherit_classpath();
 	$string[] = $ghtml->object_variable_hidden("frm_o_cname", $class);
@@ -1364,6 +1390,8 @@ function do_addform($object, $class, $dttype = null, $notitleflag = false)
 
 function create_xml($object, $stuff, $ret)
 {
+	$dclass = null;
+	$dk = null;
 	global $gbl, $sgbl, $login, $ghtml;
 
 	if (is_object($stuff)) {
@@ -1398,7 +1426,7 @@ function create_xml($object, $stuff, $ret)
 			} else {
 				$descr = $ghtml->get_classvar_description_after_overload($class, $k);
 
-				if (count($descr) < 3) {
+				if ((is_countable($descr) ? count($descr) : 0) < 3) {
 					dprint("Variable $k in $class Not Defined... <br/> \n");
 					$descr = array($class, $k, "Not Defined");
 				}

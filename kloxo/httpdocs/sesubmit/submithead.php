@@ -52,6 +52,7 @@ $totaltime = ((sizeof($usinge)*sizeof($usingp))*4)+4;
 
 function timeleft()
 {
+        $ret = null;
         global $totaltime;
 
         $seconds = $totaltime;

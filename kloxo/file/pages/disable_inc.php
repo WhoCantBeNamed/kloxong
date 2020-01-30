@@ -1,4 +1,4 @@
-	<br><br>
+<br><br>
 	<div align="center">
 		<table width="600" class="content_header">
 			<tr>

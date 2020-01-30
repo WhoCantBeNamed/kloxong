@@ -16,6 +16,7 @@ function cpanel_main()
 
 function get_addon_subdomain()
 {
+	$res = null;
 	$list = lfile("cpanel/backup-6.12.2006_10-08-09_kloxo/addons");
 
 	foreach($list as $l) {
@@ -29,6 +30,7 @@ function get_addon_subdomain()
 
 function get_domain_list($domtype)
 {
+	$domlist = null;
 	$list = lfile("cpanel/backup-6.12.2006_10-08-09_kloxo/cp/kloxo");
 
 	$i = 0;
@@ -78,6 +80,7 @@ function get_domain_list($domtype)
 
 function get_subdomain_list()
 {
+	$subdom = null;
 	$addon = get_addon_subdomain();
 	$filename='cpanel/backup-6.15.2006_08-11-26_kloxo/homedir/.cpanel-datastore/apache_LISTSUBDOMAINS_0';
 	$list = file($filename);
@@ -109,6 +112,7 @@ function get_subdomain_list()
 
 function get_mailaccounts($domainname)
 {
+	$array = null;
 	$path='cpanel/backup-6.12.2006_10-08-09_kloxo/homedir/etc';
 	$filename = "$path/$domainname/passwd";
 	$list = file($filename);
@@ -144,6 +148,7 @@ function get_mailaccount_password($mailaccount)
 
 function cpanel_old_main()
 {
+	$uuser = null;
 	global $argc, $argv;
 
 	initProgramlib('admin');

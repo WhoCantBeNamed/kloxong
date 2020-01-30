@@ -19,7 +19,7 @@ if (strpos($mysqlbranch, "mysql") !== false) {
 } else {
 
 	exec("yum list|grep MariaDB", $out, $ret);
-	
+
 //	if ($ret) {
 //		echo "- Repo for MariaDB exists.\n";
 //		echo "  Open '/etc/yum.repos.d/mratwork.repo and change 'enable=1' to 'enable=0'\n";

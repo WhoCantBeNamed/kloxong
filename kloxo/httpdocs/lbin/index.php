@@ -45,7 +45,7 @@ function domainshow()
 	?> 
 	<head>
 	<title> <?php echo $title ?> </title>
-		
+
 	<?php $ghtml->print_refresh_key(); ?> 
 
 	<FRAMESET frameborder=0 rows="93,*"  border=0>
@@ -57,7 +57,7 @@ function domainshow()
 	</FRAMESET>
 	</FRAMESET>
 	</head>
-	<?php
+<?php
 	//<FRAME name=bottomframe src="/bin/bottom.php">
 }
 

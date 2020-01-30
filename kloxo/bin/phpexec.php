@@ -4,7 +4,7 @@
 	$gid = $argv[2];
 	$cmd = '';
 
-	for ($i = 3; $i < count($argv); $i++) {
+	for ($i = 3; $i < (is_countable($argv) ? count($argv) : 0); $i++) {
 		$cmd .= "'" . $argv[$i] . "' ";
 	}
 

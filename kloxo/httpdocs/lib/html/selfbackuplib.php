@@ -1,7 +1,5 @@
 <?php 
 
-class selfbackup extends lxclass {
-
-
-
+class selfbackup extends \lxclass
+{
 }

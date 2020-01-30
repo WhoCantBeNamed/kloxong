@@ -32,7 +32,7 @@ function commandline_main()
 		if ($list) {
 			if (isset($p['output-type'])) {
 				if ($p['output-type'] === 'json') {
-					$out = json_encode($list);
+					$out = json_encode($list, JSON_THROW_ON_ERROR);
 
 					print($out);
 				} else if ($p['output-type'] === 'serialize') {

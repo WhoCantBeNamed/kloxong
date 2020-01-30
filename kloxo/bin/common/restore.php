@@ -5,6 +5,8 @@ restore_main();
 
 function restore_main()
 {
+	$rlist = null;
+	$param = null;
 	global $argc, $argv;
 	global $gbl, $login, $ghtml; 
 

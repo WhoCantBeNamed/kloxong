@@ -2,6 +2,7 @@
 
 function get_local_application_version_list()
 {
+	$ret = null;
 	$list = all_easyinstaller__linux::getListofApps();
 	$list = get_namelist_from_arraylist($list); 
 

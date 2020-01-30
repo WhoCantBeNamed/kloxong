@@ -229,7 +229,7 @@ if (getServiceType('php-fpm') === 'systemd') {
 	$seddata = 's:^prog=\"\(.*\)\":\1:';
 	exec("cat /etc/rc.d/init.d/php-fpm|grep 'prog='|sed -e '" . $seddata . "'", $out);
 }
-if (count($out) > 0) {
+if ((is_countable($out) ? count($out) : 0) > 0) {
 	$phpused = $out[0];
 
 	if ($phpused === "php-fpm") {
@@ -247,7 +247,7 @@ if ($pop3app === 'courier') { $pop3app = 'courier-imap'; }
 
 exec("rpm -qa {$pop3app}-toaster", $out);
 
-if (count($out) > 0) {
+if ((is_countable($out) ? count($out) : 0) > 0) {
 	$pop3app = $out[0];
 } else {
 	$pop3app = 'none';
@@ -259,7 +259,7 @@ $smtpapp = slave_get_driver('smtp');
 
 exec("rpm -qa {$smtpapp}-toaster", $out);
 
-if (count($out) > 0) {
+if ((is_countable($out) ? count($out) : 0) > 0) {
 	$smtpapp = $out[0];
 } else {
 	$smtpapp = 'none';
@@ -273,7 +273,7 @@ if ($spamapp === 'spamassassin') { $spamapp === 'spamassassin-toaster'; }
 
 exec("rpm -qa {$spamapp}", $out);
 
-if (count($out) > 0) {
+if ((is_countable($out) ? count($out) : 0) > 0) {
 	$spamapp = $out[0];
 } else {
 	$spamapp = '--uninstalled--';
@@ -302,14 +302,14 @@ exec("free -m", $meminfo);
 exec("df -h /", $diskinfo);
 
 $gen = $login->getObject('general')->generalmisc_b;
-$webstatsprog = ($gen->webstatisticsprogram) ? $gen->webstatisticsprogram : 'awstats';
+$webstatsprog = $gen->webstatisticsprogram ?: 'awstats';
 
 $out = null;
 
 // MR -- use grep because possible as kloxong-stats-<statsprog> or just <statsprog>
 exec("rpm -qa|grep {$webstatsprog}", $out);
 
-if (count($out) > 0) {
+if ((is_countable($out) ? count($out) : 0) > 0) {
 	$appstats = $out[0];
 } else {
 	$appstats = '--uninstalled--';

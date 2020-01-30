@@ -1,6 +1,5 @@
 <?php 
 
-class mailtraffic__qmail extends lxDriverClass {
-
-
+class mailtraffic__qmail extends \lxDriverClass
+{
 }

@@ -148,6 +148,7 @@ function get_free_loop()
 
 function lxfile_get_ntfs_disk_usage($file, $root)
 {
+	$ret = null;
 	$file = expand_real_root($file);
 	$root = fix_vgname($root);
 	$ldevice = get_partition($file, $root);
@@ -163,7 +164,7 @@ function lxfile_get_ntfs_disk_usage($file, $root)
 			continue;
 		}
 
-		list($var, $val) = explode(":", $r);
+		[$var, $val] = explode(":", $r);
 		$var = trim($var);
 		$val = trim($val);
 
@@ -184,6 +185,7 @@ function lxfile_get_ntfs_disk_usage($file, $root)
 
 function lxfile_get_disk_usage($file)
 {
+	$ret = null;
 	$file = expand_real_root($file);
 	$res = lxshell_output("dumpe2fs", "-h", $file);
 
@@ -269,6 +271,9 @@ function lxshell_tar($dir, $zipname, $filelist)
 
 function lxshell_zip_core($updateflag, $dir, $zipname, $filelist)
 {
+	$out = null;
+	$err = null;
+	$ret = null;
 	$dir = expand_real_root($dir);
 
 	foreach($filelist as &$__f) {
@@ -405,6 +410,9 @@ function lxshell_unzip($username, $dir, $file, $filelist = null)
 
 function lxshell_unzip_numeric($dir, $file, $filelist = null)
 {
+	$out = null;
+	$err = null;
+	$ret = null;
 	$dir = expand_real_root($dir);
 	$file = expand_real_root($file);
 
@@ -529,6 +537,9 @@ function lxfile_get_uncompressed_size($file)
 
 function lxfile_tmp_rm_rec($file)
 {
+	$out = null;
+	$err = null;
+	$ret = null;
 	$file = expand_real_root($file);
 	$file = remove_extra_slash($file);
 
@@ -560,6 +571,9 @@ function lxfile_rm_content($dir)
 
 function lxfile_rm_rec_content($file)
 {
+	$out = null;
+	$err = null;
+	$ret = null;
 	global $login;
 
 	$file = expand_real_root($file);
@@ -595,6 +609,9 @@ function lxfile_rm_rec_content($file)
 
 function lxfile_rm_rec($file)
 {
+	$out = null;
+	$err = null;
+	$ret = null;
 	global $login;
 
 	$file = expand_real_root($file);
@@ -678,6 +695,9 @@ function lxfile_unix_chmod_rec($file, $mod)
 
 function lxfile_mv_rec($dirsource, $dirdest)
 {
+	$out = null;
+	$err = null;
+	$ret = null;
 	$username = "__system__";
 	$dirdest = expand_real_root($dirdest);
 	$dirsource = expand_real_root($dirsource);
@@ -741,6 +761,9 @@ function xcopy($src, $dest)
 
 function lxfile_cp_rec($dirsource, $dirdest)
 { 
+	$out = null;
+	$err = null;
+	$ret = null;
 	$username = "__system__";
 	$dirdest = expand_real_root($dirdest);
 	$dirsource = expand_real_root($dirsource);
@@ -806,7 +829,7 @@ function lxfile_unix_chown($file, $mod)
 	$group = null;
 
 	if (csa($mod, ':')) {
-		list($user, $group) = explode(':', $mod);
+		[$user, $group] = explode(':', $mod);
 	} else {
 		$user = $mod;
 	}
@@ -834,6 +857,7 @@ function lxfile_unix_chown($file, $mod)
 
 function lxshell_background($cmd)
 {
+	$arglist = null;
 	global $gbl, $sgbl, $login, $ghtml; 
 	global $global_dontlogshell;
 
@@ -993,7 +1017,7 @@ function lxftp_connect($ftp_server)
 
 	$scheme = $list['scheme'];
 	$host = $list['host'];
-	$port = (isset($list['port'])) ? $list['port'] : '21';
+	$port = $list['port'] ?? '21';
 
 	if ($scheme === 'ftps') {
 		return ftp_ssl_connect($host, $port);

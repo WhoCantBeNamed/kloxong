@@ -6,9 +6,9 @@ initprogram('admin');
 
 $list = parse_opt($argv);
 
-$server = (isset($list['server'])) ? $list['server'] : 'localhost';
-$client = (isset($list['client'])) ? $list['client'] : null;
-$nolog  = (isset($list['nolog']))  ? $list['nolog'] : null;
+$server = $list['server'] ?? 'localhost';
+$client = $list['client'] ?? null;
+$nolog  = $list['nolog'] ?? null;
 
 $basefile = '/etc/pure-ftpd/pureftpd';
 

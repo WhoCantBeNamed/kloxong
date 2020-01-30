@@ -6,7 +6,7 @@ $day = 1;
 $list = parse_opt($argv);
 
 // MR -- because only 1 class (domain)
-$class = isset($list['class']) ? $list['class'] : 'domain';
+$class = $list['class'] ?? 'domain';
 /*
 if (isset($list['class'])) {
 	$class = $list['class'];

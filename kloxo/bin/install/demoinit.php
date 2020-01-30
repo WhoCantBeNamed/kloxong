@@ -89,6 +89,10 @@ function client_priv($priv, $val)
 
 function add_customer_reseller()
 {
+	$R = null;
+	$C = null;
+	$res = null;
+	$type = null;
 	global $gbl, $login, $ghtml;
 /*
 	$M[] = array("admin" => array("master", "adelia"),
@@ -148,10 +152,9 @@ function add_customer_reseller()
 
 	$a = array("M", "W", "R", "C");
 */
-	$R[] = array("admin" => array("reseller")	);
+	$R = (array) $R;
 
-	$C[] = array("admin" => array("customer", "simplehosting", "ondemand"),
-		'reseller' => array('personal', 'business'));
+	$C = (array) $C;
 
 	$a = array("R", "C");
 
@@ -193,6 +196,7 @@ function add_customer_reseller()
 
 function add_client_template()
 {
+	$res = null;
 	global $gbl, $login, $ghtml;
 
 	$arr = array(0 => "Unlimited Hosting Plan", 1 => "500MB Hosting Plan");

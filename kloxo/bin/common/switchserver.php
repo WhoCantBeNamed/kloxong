@@ -7,6 +7,8 @@ switchserver_main();
 function switchserver_main()
 {
 
+	$object = null;
+	$param = null;
 	global $argc, $argv;
 	global $gbl, $sgbl, $login, $ghtml; 
 

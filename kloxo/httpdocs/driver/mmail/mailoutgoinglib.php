@@ -1,5 +1,5 @@
 <?php
 
-class Mailoutgoing extends Lxdb
+class Mailoutgoing extends \Lxdb
 {
 }

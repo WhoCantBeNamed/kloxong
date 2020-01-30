@@ -33,7 +33,7 @@ function collect_traffic()
 	$interval = 20 * 60;
 
 //	$interval = 2;
-	
+
 	if ((time() - $ret['time']) < $interval) {
 	//	return;
 	}

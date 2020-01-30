@@ -10,7 +10,7 @@
 	$host = $a["HTTP_HOST"];
 	$splitter = explode(":", $host);
 	$domain = $splitter[0];
-	$port = ($splitter[1]) ? $splitter[1] : '7778';
+	$port = $splitter[1] ?: '7778';
 	$requesturi = $a["REQUEST_URI"];
 	$scheme = $a["HTTP_SCHEME"];
 

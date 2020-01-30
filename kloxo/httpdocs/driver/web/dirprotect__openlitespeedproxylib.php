@@ -1,8 +1,7 @@
 <?php 
 
-include_once("dirprotect__lib.php");
+include_once "dirprotect__lib.php";
 
-class dirprotect__openlitespeedproxy extends dirprotect__
+class dirprotect__openlitespeedproxy extends \dirprotect__
 {
-
 }

@@ -24,6 +24,9 @@ function shell_recurse_dir($dir, $func, $arglist = null)
 
 function lxshell_direct($cmd)
 {
+	$out = null;
+	$err = null;
+	$ret = null;
 	$username = '__system__';
 	do_exec_system($username, null, $cmd, $out, $err, $ret, null);
 }
@@ -58,6 +61,7 @@ function lxshell_unzip_with_throw($dir, $file, $list = null)
 
 function lxshell_redirect($file, $cmd)
 {
+	$arglist = null;
 	global $gbl, $sgbl, $login, $ghtml; 
 
 	$start = 2;
@@ -87,6 +91,10 @@ function lxshell_redirect($file, $cmd)
 
 function lxshell_directory($dir, $cmd)
 {
+	$arglist = null;
+	$out = null;
+	$err = null;
+	$ret = null;
 	global $gbl, $sgbl, $login, $ghtml; 
 
 	$dir = expand_real_root($dir);
@@ -118,6 +126,10 @@ function lxshell_directory($dir, $cmd)
 
 function lxshell_output($cmd)
 {
+	$arglist = null;
+	$out = null;
+	$err = null;
+	$ret = null;
 	global $gbl, $sgbl, $login, $ghtml; 
 
 	$username = '__system__';
@@ -145,6 +157,10 @@ function lxshell_output($cmd)
 
 function lxshell_return($cmd)
 {
+	$arglist = null;
+	$out = null;
+	$err = null;
+	$ret = null;
 	global $sgbl;
 	$username = '__system__';
 
@@ -178,6 +194,10 @@ function lxshell_php($cmd)
 
 function lxshell_input($input, $cmd)
 {
+	$arglist = null;
+	$out = null;
+	$err = null;
+	$ret = null;
 	global $sgbl;
 	$username = '__system__';
 
@@ -340,7 +360,7 @@ function lxuser_put_contents($username, $file, $data, $flag = 0)
 function lxuser_chmod($username, $file, $mod)
 {
 	// I'm not sure how we should implement this method ???
-	
+
 	lxfile_generic_chmod($file, $mod);
 	//lxfile_generic_chown($file, $username); ???
 }
@@ -353,6 +373,7 @@ function lxuser_chmod($username, $file, $mod)
  * @return depends on executed command
  */
 function lxuser_return($username, $cmd) {
+	$arglist = null;
 	global $sgbl;
 	
 	$start = 2;
@@ -612,6 +633,7 @@ function lxfile_dstat($dir, $duflag)
 
 function lxfile_getfile($file, $bytes = null)
 {
+	$lines = null;
 	global $login;
 
 	$file = expand_real_root($file);
@@ -621,7 +643,7 @@ function lxfile_getfile($file, $bytes = null)
 		$lines = 200;
 	}
 
-	if ($lines === 'download') {
+	if ($lines === 0) {
 		throw new lxException($login->getThrow('could_not_download_here'));
 		$lines = null;
 	}

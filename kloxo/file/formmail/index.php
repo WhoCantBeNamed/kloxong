@@ -1,4 +1,3 @@
-
 <tr> <td>
 <table border="0" cellpadding="3" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111"         |class=normaltxt bgcolor=#eeeeee>
   <form method="POST" action="/__lx_path__/formmail.php">

@@ -5,8 +5,8 @@ initProgram('admin');
 
 $list = parse_opt($argv);
 
-$server = (isset($list['server'])) ? $list['server'] : 'localhost';
-$nolog  = (isset($list['nolog'])) ? $list['nolog'] : null;
+$server = $list['server'] ?? 'localhost';
+$nolog  = $list['nolog'] ?? null;
 
 $login->loadAllObjects('client');
 $list = $login->getList('client');

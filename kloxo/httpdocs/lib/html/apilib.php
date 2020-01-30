@@ -20,14 +20,14 @@ function send_to_some_http_server($raddress, $port, $url)
 
 	$totalout = curl_exec($ch);
 	$totalout = trim($totalout);
-	$totalout = json_decode($totalout);
+	$totalout = json_decode($totalout, false, 512, JSON_THROW_ON_ERROR);
 
 	return $totalout;
 }
 
 function get_and_print_a_select_variable($description, $remotevar, $localvar)
 {
-	list($server, $port) = explode(":", $_SERVER['SERVER_NAME']);
+	[$server, $port] = explode(":", $_SERVER['SERVER_NAME']);
 	print("$description <br> ");
 	// Send the remote variable to hypervm and get the result.
 	$out = send_to_some_http_server($server, $port, "action=simplelist&resource=$remotevar");

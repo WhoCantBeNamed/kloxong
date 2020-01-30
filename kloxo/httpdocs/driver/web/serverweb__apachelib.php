@@ -1,11 +1,11 @@
 <?php
 
-include_once("serverweb__lib.php");
+include_once "serverweb__lib.php";
 
-class serverweb__apache extends serverweb__
+class serverweb__apache extends \serverweb__
 {
-	function __construct()
-	{
-		parent::__construct();
-	}
+    function __construct()
+    {
+        parent::__construct();
+    }
 }

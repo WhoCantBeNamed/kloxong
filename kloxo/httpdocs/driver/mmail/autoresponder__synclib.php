@@ -1,7 +1,6 @@
 <?php 
 
-class autoresponder__sync extends lxDriverClass {
-
-
+class autoresponder__sync extends \lxDriverClass
+{
 }
 

@@ -4,8 +4,8 @@ initProgram('admin');
 
 $list = parse_opt($argv);
 
-$server = (isset($list['server'])) ? $list['server'] : 'localhost';
-$client = (isset($list['client'])) ? $list['client'] : null;
+$server = $list['server'] ?? 'localhost';
+$client = $list['client'] ?? null;
 
 $login->loadAllObjects('client');
 $list = $login->getList('client');

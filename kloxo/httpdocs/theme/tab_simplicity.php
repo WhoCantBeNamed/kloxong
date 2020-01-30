@@ -2,6 +2,7 @@
 
 function print_tab_block_start($alist)
 {
+	$nalist = null;
 	global $gbl, $sgbl, $login, $ghtml;
 	$img_path = $login->getSkinDir();
 
@@ -39,7 +40,7 @@ function print_tab_block_start($alist)
 
 	$list = $ghtml->whichTabSelect($alist);
 	$list[-1] = false;
-	$list[count($list) - 1] = false;
+	$list[(is_countable($list) ? count($list) : 0) - 1] = false;
 
 	foreach ($alist as $k => $a) {
 		print_tab_button($k, $a, $list);
@@ -54,6 +55,12 @@ function print_tab_block_start($alist)
 
 function print_tab_button($key, $url, $list)
 {
+	$path = null;
+	$post = null;
+	$file = null;
+	$name = null;
+	$image = null;
+	$__t_identity = null;
 	global $gbl, $sgbl, $login, $ghtml;
 
 	$skin_color = $login->getSpecialObject('sp_specialplay')->skin_color;
@@ -98,7 +105,7 @@ function print_tab_button($key, $url, $list)
 		return;
 	}
 
-	$lastkey = count($list);
+	$lastkey = is_countable($list) ? count($list) : 0;
 
 	if ($check) {
 ?>

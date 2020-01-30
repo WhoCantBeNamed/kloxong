@@ -65,6 +65,7 @@ function check_if_skip($l)
 
 function add_line_to_secondary_mycnf($master, $slavepass)
 {
+	$ll = null;
 	global $gbl, $sgbl, $login, $ghtml; 
 
 	if (!lxfile_exists("/etc/secondary_master.copy.my.cnf")) {

@@ -3,10 +3,10 @@
 include_once "lib/html/include.php"; 
 initProgram('admin');
 
-$server = (isset($list['server'])) ? $list['server'] : 'localhost';
-$client = (isset($list['client'])) ? $list['client'] : null;
-$domain = (isset($list['domain'])) ? $list['domain'] : null;
-$nolog  = (isset($list['nolog'])) ? $list['nolog'] : null;
+$server = $list['server'] ?? 'localhost';
+$client = $list['client'] ?? null;
+$domain = $list['domain'] ?? null;
+$nolog  = $list['nolog'] ?? null;
 
 $login->loadAllObjects('client');
 $list = $login->getList('client');

@@ -21,11 +21,12 @@ $cgi_action = "__ajax_desc_{$ghtml->frm_action}";
 //sleep(6);
 $ret = $cgi_action();
 while(@ob_end_clean());
-print(json_encode($ret));
+print(json_encode($ret, JSON_THROW_ON_ERROR));
 flush();
 
 function convert_tree_to_frm_o()
 {
+	$frmo = null;
 	global $gbl, $sgbl, $login, $ghtml;
 	
 	$cid = $ghtml->node;
@@ -55,7 +56,7 @@ function convert_tree_to_frm_o()
 		$ghtml->__resource_class = false;
 
 		if (csa($d, "-")) {
-			list($class, $name) = getClassAndName($d);
+			[$class, $name] = getClassAndName($d);
 			$frmo[$i]['class'] = $class;
 			$frmo[$i]['nname'] = $name;
 		} else {
@@ -70,6 +71,7 @@ function convert_tree_to_frm_o()
 
 function __ajax_desc_tree()
 {
+	$alist = null;
 	global $gbl, $sgbl, $login, $ghtml;
 	
 	$object = $gbl->__c_object;
@@ -180,6 +182,12 @@ function __ajax_desc_tree()
 
 function __ajax_desc_list()
 {
+	$path = null;
+	$post = null;
+	$file = null;
+	$name = null;
+	$image = null;
+	$__t_identity = null;
 	global $gbl, $sgbl, $login, $ghtml;
 
 	$buttonpath = get_image_path();
@@ -199,6 +207,12 @@ function __ajax_desc_list()
 
 function __ajax_desc_addform()
 {
+	$path = null;
+	$post = null;
+	$file = null;
+	$name = null;
+	$image = null;
+	$__t_identity = null;
 	global $gbl, $sgbl, $login, $ghtml;
 	
 	$object = $gbl->__c_object;
@@ -223,6 +237,12 @@ function __ajax_desc_addform()
 
 function __ajax_desc_updateform()
 {
+	$path = null;
+	$post = null;
+	$file = null;
+	$name = null;
+	$image = null;
+	$__t_identity = null;
 	global $gbl, $sgbl, $login, $ghtml;
 	
 	$object = $gbl->__c_object;

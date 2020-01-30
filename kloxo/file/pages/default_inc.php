@@ -1,4 +1,4 @@
-	<br><br>
+<br><br>
 	<div align="center">
 		<table class="content_body" width="640">
 			<tr>
