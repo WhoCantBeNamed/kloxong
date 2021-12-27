@@ -3,7 +3,7 @@
 Summary: KloxoNG release file and package configuration
 Name: kloxong-release
 Version: 0.1.1
-Release: 2
+Release: 3
 License: AGPLV3
 Group: System Environment/Base
 URL: http://kloxong.org/
@@ -13,6 +13,15 @@ Packager: John Parnell Pierce <john@luckytanuki.com>
 Vendor: Kloxo Next Generation Repository, http://%{repohost}/
 #BuildRequires: redhat-rpm-config
 Obsoletes: mratwork-release > 0 , mratwork-testing > 0
+
+%if 0%{?fedora} >= 27 || 0%{?rhel} >= 8
+# switch to add and exclude repos for EL8
+%global with_pre8_repos  0
+%else
+%global with_pre8_repos  1
+%endif
+
+
 
 %description
 Kloxo Next Generation rpm release. This package contains yum configuration for the Kloxo Next Generation RPM Repository.
@@ -60,61 +69,10 @@ gpgcheck=0
 
 # ==================================
 
-[kloxong-ius]
-name=KloxoNG - IUS Community Packages for EL \$releasever
-baseurl=https://repo.ius.io/\$releasever/\$basearch
-enabled=1
-gpgcheck=0
-exclude=mysql51* mysql56* mariadb* postfix32u*
-
-[kloxong-ius-archive]
-name=KloxoNG - IUS Community Packages for EL \$releasever (archive)
-baseurl=https://repo.ius.io/archive/\$releasever/\$basearch
-enabled=1
-gpgcheck=0
-exclude=mysql51* mysql56*  mariadb* postfix32u*
-
-[kloxong-ius-testing]
-name=KloxoNG - IUS Community Packages for EL \$releasever (testing)
-baseurl=https://repo.ius.io/testing/\$releasever/\$basearch
-enabled=0
-gpgcheck=0
-exclude=mysql51* mysql56*  mariadb* postfix32u*
-
-# ==================================
-
-# for Webtatic
-[kloxong-webtatic]
-name=KloxoNG - Webtatic for CentOS \$releasever - \$basearch
-#baseurl=http://repo.webtatic.com/yum/el\$releasever/\$basearch
-mirrorlist=http://mirror.webtatic.com/yum/el\$releasever/\$basearch/mirrorlist
-enabled=1
-gpgcheck=0
-exclude=mysql* nginx*
-
-[kloxong-webtatic-archive]
-name=KloxoNG - Webtatic for CentOS \$releasever Archive - \$basearch
-#baseurl=http://repo.webtatic.com/yum/el\$releasever-archive/\$basearch
-mirrorlist=http://mirror.webtatic.com/yum/el\$releasever-archive/\$basearch/mirrorlist
-enabled=1
-gpgcheck=0
-exclude=mysql* nginx*
-
-[kloxong-webtatic-testing]
-name=KloxoNG - Webtatic for CentOS \$releasever Testing - \$basearch
-#baseurl=http://repo.webtatic.com/yum/el\$releasever/\$basearch
-mirrorlist=http://mirror.webtatic.com/yum/el\$releasever-testing/\$basearch/mirrorlist
-enabled=1
-gpgcheck=0
-exclude=mysql* nginx*
-
-
-# ==================================
-
 [kloxong-remi]
 name=KloxoNG - Les RPM de remi pour Enterprise Linux \$releasever
 #baseurl=http://rpms.famillecollet.com/enterprise/\$releasever/remi/\$basearch/
-mirrorlist=http://rpms.famillecollet.com/enterprise/\$releasever/remi/mirror
+mirrorlist=http://cdn.remirepo.net/enterprise/8/remi/$basearch/mirror
 enabled=0
 gpgcheck=0
 includepkgs=php-ffmpeg php-ioncube-loader
@@ -128,20 +86,6 @@ mirrorlist=http://mirrors.fedoraproject.org/metalink?repo=epel-\$releasever&arch
 enabled=1
 gpgcheck=0
 exclude=postfix* exim* ssmtp* pdns*
-
-# ==================================
-
-# for varnish
-[kloxong-varnish]
-name=KloxoNG - Varnish for EL \$releasever
-baseurl=https://packagecloud.io/varnishcache/varnish5/el/\$releasever/\$basearch
-repo_gpgcheck=1
-gpgcheck=0
-enabled=1
-gpgkey=https://packagecloud.io/varnishcache/varnish5/gpgkey
-sslverify=1
-sslcacert=/etc/pki/tls/certs/ca-bundle.crt
-metadata_expire=300
 
 # ==================================
 
@@ -174,7 +118,7 @@ gpgcheck=0
 # for mariadb
 [kloxong-mariadb]
 name=KloxoNG - mariadb repo
-baseurl=http://yum.mariadb.org/10.0/centos/\$releasever/\$basearch/
+baseurl=http://yum.mariadb.org/10.5/centos/\$releasever/\$basearch/
 enabled=1
 gpgcheck=0
 
@@ -290,6 +234,80 @@ gpgcheck=0
 
 _EOF_
 
+
+%if %{with_pre8_repos}
+cat >> kloxong.repo << _EOF_
+# ==================================
+
+[kloxong-ius]
+name=KloxoNG - IUS Community Packages for EL \$releasever
+baseurl=https://repo.ius.io/\$releasever/\$basearch
+enabled=1
+gpgcheck=0
+exclude=mysql51* mysql56* mariadb* postfix32u*
+
+[kloxong-ius-archive]
+name=KloxoNG - IUS Community Packages for EL \$releasever (archive)
+baseurl=https://repo.ius.io/archive/\$releasever/\$basearch
+enabled=1
+gpgcheck=0
+exclude=mysql51* mysql56*  mariadb* postfix32u*
+
+[kloxong-ius-testing]
+name=KloxoNG - IUS Community Packages for EL \$releasever (testing)
+baseurl=https://repo.ius.io/testing/\$releasever/\$basearch
+enabled=0
+gpgcheck=0
+exclude=mysql51* mysql56*  mariadb* postfix32u*
+
+# ==================================
+
+# for Webtatic
+[kloxong-webtatic]
+name=KloxoNG - Webtatic for CentOS \$releasever - \$basearch
+#baseurl=http://repo.webtatic.com/yum/el\$releasever/\$basearch
+mirrorlist=http://mirror.webtatic.com/yum/el\$releasever/\$basearch/mirrorlist
+enabled=1
+gpgcheck=0
+exclude=mysql* nginx*
+
+[kloxong-webtatic-archive]
+name=KloxoNG - Webtatic for CentOS \$releasever Archive - \$basearch
+#baseurl=http://repo.webtatic.com/yum/el\$releasever-archive/\$basearch
+mirrorlist=http://mirror.webtatic.com/yum/el\$releasever-archive/\$basearch/mirrorlist
+enabled=1
+gpgcheck=0
+exclude=mysql* nginx*
+
+[kloxong-webtatic-testing]
+name=KloxoNG - Webtatic for CentOS \$releasever Testing - \$basearch
+#baseurl=http://repo.webtatic.com/yum/el\$releasever/\$basearch
+mirrorlist=http://mirror.webtatic.com/yum/el\$releasever-testing/\$basearch/mirrorlist
+enabled=1
+gpgcheck=0
+exclude=mysql* nginx*
+
+# ==================================
+
+# for varnish
+[kloxong-varnish]
+name=KloxoNG - Varnish for EL \$releasever
+baseurl=https://packagecloud.io/varnishcache/varnish5/el/\$releasever/\$basearch
+repo_gpgcheck=1
+gpgcheck=0
+enabled=1
+gpgkey=https://packagecloud.io/varnishcache/varnish5/gpgkey
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+metadata_expire=300
+
+
+_EOF_
+
+%endif
+
+
+
 %install
 %{__rm} -rf %{buildroot}
 %{__mkdir} -p %{buildroot}%{_sysconfdir}/yum.repos.d/
@@ -313,6 +331,9 @@ install -m 755 kloxong.repo %{buildroot}%{_sysconfdir}/yum.repos.d/kloxong.repo
 %{_sysconfdir}/yum.repos.d/kloxong.repo
 
 %changelog
+* Thu Oct 7 2021  John Parnell Pierce <john@luckytanuki.com> - 0.1.1-3
+- Exclude IUS from Centos 8 version 
+
 * Sat Jun 5 2021  John Parnell Pierce <john@luckytanuki.com> - 0.1.1-2
 - Exclude postfix32u* as it conflicts with toaster packages 
 
