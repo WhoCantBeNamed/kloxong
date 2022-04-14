@@ -169,7 +169,7 @@ EOF
 
 
 %changelog
-* Thu April 14 2022 John Parnell Pierce <john@luckytanuki.com> - 0.1.3-2
+* Thu Apr 14 2022 John Parnell Pierce <john@luckytanuki.com> - 0.1.3-2
 - Block loading of postfix32u as this conflicts with toater packages
 - Remove old webmail packages
 - support for php80
