@@ -33,7 +33,7 @@
 Name: %{productname}
 Summary: Kloxo Next Generation web panel
 Version: 0.1.3
-Release: 1
+Release: 2
 #Release: beta.%{build_timestamp}
 License: GPL
 Group: Applications/Internet
@@ -169,6 +169,15 @@ EOF
 
 
 %changelog
+* Thu April 14 2022 John Parnell Pierce <john@luckytanuki.com> - 0.1.3-2
+- Block loading of postfix32u as this conflicts with toater packages
+- Remove old webmail packages
+- support for php80
+- Update mariadb-upgrade script to work with the new version of mariadb
+- Update MariaDB repo to version 10.5
+- Fix Remi repo address
+- Fix domain key folder permission issues
+- remove extra slash from djbdns comd
 
 * Tue May 25 2021 John Parnell Pierce <john@luckytanuki.com> - 0.1.3-1
 - test for null domain records when building DNS configuration files
