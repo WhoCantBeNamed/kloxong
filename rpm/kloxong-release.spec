@@ -118,7 +118,7 @@ gpgcheck=0
 # for mariadb
 [kloxong-mariadb]
 name=KloxoNG - mariadb repo
-baseurl=http://yum.mariadb.org/10.5/centos/\$releasever/\$basearch/
+baseurl=http://yum.mariadb.org/10.2/centos/\$releasever/\$basearch/
 enabled=1
 gpgcheck=0
 
