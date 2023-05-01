@@ -33,7 +33,7 @@
 Name: %{productname}
 Summary: Kloxo Next Generation web panel
 Version: 0.1.3
-Release: 2
+Release: 3
 #Release: beta.%{build_timestamp}
 License: GPL
 Group: Applications/Internet
@@ -169,6 +169,11 @@ EOF
 
 
 %changelog
+* Thu Apr 14 2022 John Parnell Pierce <john@luckytanuki.com> - 0.1.3-3
+- Fix wrong brackets and variable in Fix-outgoingips
+- Fix typo in fixdomainkey
+- Move Kloxong Curl into its own yum repo to fix build errors
+
 * Thu Apr 14 2022 John Parnell Pierce <john@luckytanuki.com> - 0.1.3-2
 - Block loading of postfix32u as this conflicts with toater packages
 - Remove old webmail packages
