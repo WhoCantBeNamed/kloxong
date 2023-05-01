@@ -3,7 +3,7 @@
 Summary: KloxoNG release file and package configuration
 Name: kloxong-release
 Version: 0.1.1
-Release: 4
+Release: 5
 License: AGPLV3
 Group: System Environment/Base
 URL: http://kloxong.org/
