@@ -53,10 +53,23 @@ repo_gpgcheck=0
 enabled=1
 enabled_metadata=1
 
+[kloxong-copr-curl]
+name=kloxong curl repo 
+baseurl=https://copr-be.cloud.fedoraproject.org/results/kloxong/Curl/epel-\$releasever-\$basearch/
+type=rpm-md
+skip_if_unavailable=True
+gpgcheck=1
+gpgkey=https://copr-be.cloud.fedoraproject.org/results/kloxong/Curl/pubkey.gpg
+repo_gpgcheck=0
+enabled=1
+enabled_metadata=1
+
+
 [kloxong-release-version-arch]
 name=KloxoNG - release-version-arch
 baseurl=https://%{repohost}/kloxong/release/centos\$releasever/\$basearch/
 #mirrorlist=https://%{mirrorhost}/kloxong-release-centos\$releasever-\$basearch-mirrors.txt
+skip_if_unavailable=True
 enabled=1
 gpgcheck=0
 
@@ -64,6 +77,7 @@ gpgcheck=0
 name=KloxoNG - srpms
 baseurl=https://%{repohost}/kloxong/SRPMS/
 #mirrorlist=https://%{mirrorhost}/kloxong-SRPMS-mirrors.txt
+skip_if_unavailable=True
 enabled=0
 gpgcheck=0
 
@@ -336,6 +350,12 @@ install -m 755 kloxong.repo %{buildroot}%{_sysconfdir}/yum.repos.d/kloxong.repo
 %{_sysconfdir}/yum.repos.d/kloxong.repo
 
 %changelog
+* Mon May 1 2023  John Parnell Pierce <john@luckytanuki.com> - 0.1.1-5
+- Move Kloxong Curl to it own copr repo
+
+* Fri Apr 15 2022  John Parnell Pierce <john@luckytanuki.com> - 0.1.1-4
+- Add repo includes/excludes for EL8 builds
+
 * Thu Oct 7 2021  John Parnell Pierce <john@luckytanuki.com> - 0.1.1-3
 - Exclude IUS from Centos 8 version 
 
