@@ -188,12 +188,12 @@ echo ${x} >>${main_path}/${base_name}_install.log
 	sed -i 's:/opt/remi/'${src_name}'/root/usr:'${main_path}'/usr:g' ${i}
 	sed -i 's:/var/opt/remi/'${src_name}':'${main_path}'/var:g' ${i}
     done
-    ln -sf lsphp lsphp81
-    ln -sf  php php81
-    ln -sf  php-cgi php81-cgi
-    ln -sf  pear php81-pear
-    ln -sf  phar php81-phar
-    ln -sf  phpdbg php81-phpdbg
+    ln -sf lsphp ls${src_name}
+    ln -sf  php ${src_name}
+    ln -sf  php-cgi ${src_name}-cgi
+    ln -sf  pear ${src_name}-pear
+    ln -sf  phar ${src_name}-phar
+    ln -sf  phpdbg ${src_name}-phpdbg
     
     cd ${main_path}/usr/share/pear
     for i in peclcmd.php pearcmd.php ;do
