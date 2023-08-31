@@ -169,6 +169,10 @@ EOF
 
 
 %changelog
+* Fri Sep 1 2023 John Parnell Pierce <john@luckytanuki.com> - 0.1.3-5
+- fixing parsing of remi package names
+- fix rewriting of remi php symlinks
+
 * Thu Aug 31 2023 John Parnell Pierce <john@luckytanuki.com> - 0.1.3-4
 - php install now loads remi php packages
 - add php8.1 and php8.2 to list if available php versions
