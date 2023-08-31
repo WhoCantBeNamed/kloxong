@@ -3,7 +3,7 @@
 Summary: KloxoNG release file and package configuration
 Name: kloxong-release
 Version: 0.1.1
-Release: 6
+Release: 7
 License: AGPLV3
 Group: System Environment/Base
 URL: http://kloxong.org/
@@ -85,8 +85,8 @@ gpgcheck=0
 
 [kloxong-remi]
 name=KloxoNG - Les RPM de remi pour Enterprise Linux $releasever
-#baseurl=http://rpms.famillecollet.com/enterprise/$releasever/remi/$basearch/
-mirrorlist=http://cdn.remirepo.net/enterprise/$releasever/remi/mirror
+#baseurl=http://rpms.famillecollet.com/enterprise/\$releasever/remi/$basearch/
+mirrorlist=http://cdn.remirepo.net/enterprise/\$releasever/remi/mirror
 gpgcheck=0
 enabled=1
 #includepkgs=php-ffmpeg php-ioncube-loader
@@ -347,6 +347,9 @@ install -m 755 kloxong.repo %{buildroot}%{_sysconfdir}/yum.repos.d/kloxong.repo
 %{_sysconfdir}/yum.repos.d/kloxong.repo
 
 %changelog
+* Thu Aug 31 2023  John Parnell Pierce <john@luckytanuki.com> - 0.1.1-7
+- Fix typo in remi mirror url
+
 * Thu Aug 31 2023  John Parnell Pierce <john@luckytanuki.com> - 0.1.1-6
 - Active remi repo for php 8.1 & 8.2
 
