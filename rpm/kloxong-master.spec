@@ -33,7 +33,7 @@
 Name: %{productname}
 Summary: Kloxo Next Generation web panel
 Version: 0.1.3
-Release: 3
+Release: 4
 #Release: beta.%{build_timestamp}
 License: GPL
 Group: Applications/Internet
@@ -169,6 +169,10 @@ EOF
 
 
 %changelog
+* Thu Aug 31 2023 John Parnell Pierce <john@luckytanuki.com> - 0.1.3-4
+- php install now loads remi php packages
+- add php8.1 and php8.2 to list if available php versions
+
 * Thu Apr 14 2022 John Parnell Pierce <john@luckytanuki.com> - 0.1.3-3
 - Fix wrong brackets and variable in Fix-outgoingips
 - Fix typo in fixdomainkey
