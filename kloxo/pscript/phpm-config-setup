@@ -85,9 +85,22 @@ done
 for j in php.d php-zts.d ; do
 	if [ -d ${main_path}/etc/${j} ] ; then
 		if [ -d ${main_path}/etc/${j} ] ; then
-			for i in dba dbase eaccelerator ioncube pdo_dblib pdo_odbc pdo_pgsql pgsql suhosin odbc mongo \
-				apc apcu imagick interbase ioncube-loader sourceguardian memcache memcached \
-				z-memcached mssql debug pdo_dblib pdo_firebird xdebug xcache opcache lzf redis enchant wddx sphinx amqp ; do
+			for i in ahocorasick amqp apc apcu apfd base58 bitset brotli bsdiff cassandra couchbase crypto csv \
+				dba dbase ddtrace debug decimal eaccelerator enchant ffi geospatial gmagick gnupg \
+				grpc handlebars hdrhistogram horde_lz4 http http_message ice igbinary imagick \
+				immutable_cache interbase ioncube ioncube-loader ioncube_loader json_post jsonpath lzf maxminddb \
+				memcache memcached memprof mongo mongodb msgpack mssql mustache mysqlnd_krb nsq \
+				oauth oci8 odbc opcache pam pdo_dblib pdo_firebird pdo_oci pdo_odbc pdo_pgsql \
+				pdo_sqlite pgsql phalcon pq psr raphf rar rdkafka realpath_turbo redis rrd \
+				scoutapm SeasClick SeasSnowflake simdjson solr sourceguardian sphinx ssdeep \
+				ssh2 stats stomp suhosin swoole sync teds tensor trader \
+				uopz wddx xcache xdebug xmldiff xxtea xz yac seaslog mysql\
+				ast awscrt dio ds eio env ev event excimer fann gearman geoip geos inotify ion ip2location \
+				ip2proxy krb5 leveldb libvirt-php luasandbox lz4 opencensus opentelemetry parle pcov pcsc \
+				pdlib php_trie pkcs11 protobuf ps quickhash rpminfo runkit7 scrypt \
+				selinux simple_kafka_client skywalking smbclient snappy snuffleupagus sqlsrv translit uploadprogress \
+				uuid uv var_representation varnish vips vld xattr xdiff xhprof xlswriter \
+				yaconf yaf yaml yar yaz zephir_parser z-memcached zmq zstd ; do
 
 				a=$(dir -l ${main_path}/etc/${j}|grep "${i}_unused\.nonini"|awk '{print $9}'|tr '\n' ' ')
 
@@ -148,6 +161,57 @@ for j in php.d php-zts.d ; do
 		done
 	fi
 done
+
+if [ -f ${main_path}/remi ]	; then
+x="- Fix remi paths"
+echo ${x}
+echo ${x} >>${main_path}/${base_name}_install.log
+
+    if	[ ! -d /etc/opt/remi ] ; then
+        mkdir -p /etc/opt/remi
+    fi	
+    cd /etc/opt/remi
+
+    ln -sn ${main_path}/custom ${src_name}
+
+    cd ${main_path}/etc
+    rm -f php.ini >/dev/null 2>&1
+    ln -s ${main_path}/custom/php.ini php.ini
+
+
+    cd ${main_path}/usr/bin
+    for i in phpize pear peardev pecl phpsdl php-config phar phar.phar ;do
+	x="- Update ${main_path}/usr/bin/${i} settings"
+	echo ${x}
+	echo ${x} >>${main_path}/${base_name}_install.log
+	sed -i 's:/etc/opt/remi/'${src_name}':'${main_path}'/etc:g' ${i}
+	sed -i 's:/opt/remi/'${src_name}'/root/usr:'${main_path}'/usr:g' ${i}
+	sed -i 's:/var/opt/remi/'${src_name}':'${main_path}'/var:g' ${i}
+    done
+    ln -sf lsphp lsphp81
+    ln -sf  php php81
+    ln -sf  php-cgi php81-cgi
+    ln -sf  pear php81-pear
+    ln -sf  phar php81-phar
+    ln -sf  phpdbg php81-phpdbg
+    
+    cd ${main_path}/usr/share/pear
+    for i in peclcmd.php pearcmd.php ;do
+        sed -i 's:/etc/opt/remi/'${src_name}':'${main_path}'/etc:g' ${i}
+	sed -i 's:/opt/remi/'${src_name}'/root/usr:'${main_path}'/usr:g' ${i}
+	sed -i 's:/var/opt/remi/'${src_name}':'${main_path}'/var:g' ${i}
+    done
+    cd ${main_path}/usr/lib/rpm/macros.d
+    for i in macros.php81-pear macros.php81-php ;do
+        sed -i 's:/etc/opt/remi/'${src_name}':'${main_path}'/etc:g' ${i}
+	sed -i 's:/opt/remi/'${src_name}'/root/usr:'${main_path}'/usr:g' ${i}
+	sed -i 's:/var/opt/remi/'${src_name}':'${main_path}'/var:g' ${i}
+    done
+
+
+fi
+
+
 
 cd ${main_path}
 

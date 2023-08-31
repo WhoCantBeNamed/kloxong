@@ -27,3 +27,7 @@ php73w_run="${php_yum} php73w-* mod_php73u --exclude=php*-mysql* ${php_exclude}"
 php74_run="${php_yum} php74-* mod_php74 ${php_exclude}"
 
 php80_run="${php_yum} php80-* ${php_exclude}"
+
+php81_run="${php_yum} php81-php-* ${php_exclude}"
+
+php82_run="${php_yum} php82-php-* ${php_exclude}"

@@ -74,6 +74,8 @@ elif yum list ${src_name}-cli >/dev/null 2>&1 ; then
 	pack_name="${src_name}"
 elif yum list ${src_name}w-cli >/dev/null 2>&1 ; then
 	pack_name="${src_name}w"
+elif yum list ${src_name}-php-cli >/dev/null 2>&1 ; then
+	pack_name="${src_name}-php"
 else
 	echo "- No PHP packages exists. Only detecting '${src_name}u', '${src_name}' or '${src_name}w'. Exit"
 	echo
@@ -140,7 +142,8 @@ x="-- Check dependencies rpms"
 echo $x
 echo $x >>${main_path}/${base_name}_install.log
 
-repoquery --qf='%{name}' --requires --resolve ${pack_name}-*|egrep -iv '(php|mysql|postgresql|mariadb|httpd|openssl|nginx|tengine|pear1u)(.*)'|sort -u > ${main_path}/dependencies
+repoquery --qf='%{name}' --requires --resolve ${pack_name}-*|egrep -iv "(${src_name}|mysql|postgresql|mariadb|httpd|openssl|nginx|tengine|pear1u)(.*)"|sort -u > ${main_path}/dependencies
+
 
 if [ "$(yum list|grep libmemcached10)" != "" ] ; then
 	libm1=$(yum info libmemcached10${v}|grep Version|awk '{print $3}')
@@ -194,6 +197,21 @@ for i in $(ls ./*.rpm) ; do
 done
 
 'rm' -rf ./*.rpm
+
+if [ -d ${main_path}/opt/remi ] ; then
+x="- Remi found, rearranging folders"
+echo $x
+echo $x >>${main_path}/${base_name}_install.log
+
+    echo 1 > ${main_path}/remi
+    /bin/cp -r -v ${main_path}/opt/remi/${src_name}/root/usr/* ${main_path}/usr >>${main_path}/${base_name}_install.log
+    /bin/cp -r -v ${main_path}/etc/opt/remi/${src_name}/* ${main_path}/etc >>${main_path}/${base_name}_install.log
+    /bin/cp -r -v ${main_path}/var/opt/remi/${src_name}/* ${main_path}/var >>${main_path}/${base_name}_install.log
+    rm -r -v ${main_path}/opt >>${main_path}/${base_name}_install.log	
+    rm -r -v ${main_path}/etc/opt	>>${main_path}/${base_name}_install.log	
+    rm -r -v ${main_path}/var/opt	>>${main_path}/${base_name}_install.log
+fi  
+
 
 cd /
 sh /script/phpm-config-setup $base_name
