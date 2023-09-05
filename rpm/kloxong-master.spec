@@ -33,7 +33,7 @@
 Name: %{productname}
 Summary: Kloxo Next Generation web panel
 Version: 0.1.3
-Release: 5
+Release: 6
 #Release: beta.%{build_timestamp}
 License: GPL
 Group: Applications/Internet
@@ -169,6 +169,10 @@ EOF
 
 
 %changelog
+* Tue Sep 5 2023 John Parnell Pierce <john@luckytanuki.com> - 0.1.3-6
+- adjust excluded php packages
+- ensure mysql modules are active
+
 * Fri Sep 1 2023 John Parnell Pierce <john@luckytanuki.com> - 0.1.3-5
 - fixing parsing of remi package names
 - fix rewriting of remi php symlinks

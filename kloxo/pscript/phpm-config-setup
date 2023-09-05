@@ -94,7 +94,7 @@ for j in php.d php-zts.d ; do
 				pdo_sqlite pgsql phalcon pq psr raphf rar rdkafka realpath_turbo redis rrd \
 				scoutapm SeasClick SeasSnowflake simdjson solr sourceguardian sphinx ssdeep \
 				ssh2 stats stomp suhosin swoole sync teds tensor trader \
-				uopz wddx xcache xdebug xmldiff xxtea xz yac seaslog mysql\
+				uopz wddx xcache xdebug xmldiff xxtea xz yac seaslog \
 				ast awscrt dio ds eio env ev event excimer fann gearman geoip geos inotify ion ip2location \
 				ip2proxy krb5 leveldb libvirt-php luasandbox lz4 opencensus opentelemetry parle pcov pcsc \
 				pdlib php_trie pkcs11 protobuf ps quickhash rpminfo runkit7 scrypt \
