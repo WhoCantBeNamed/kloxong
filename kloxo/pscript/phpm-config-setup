@@ -172,11 +172,11 @@ echo ${x} >>${main_path}/${base_name}_install.log
     fi	
     cd /etc/opt/remi
 
-    ln -sn ${main_path}/custom ${src_name}
+    ln -snf ${main_path}/custom ${src_name}
 
     cd ${main_path}/etc
     rm -f php.ini >/dev/null 2>&1
-    ln -s ${main_path}/custom/php.ini php.ini
+    ln -sf ${main_path}/custom/php.ini php.ini
 
 
     cd ${main_path}/usr/bin
@@ -202,7 +202,7 @@ echo ${x} >>${main_path}/${base_name}_install.log
 	sed -i 's:/var/opt/remi/'${src_name}':'${main_path}'/var:g' ${i}
     done
     cd ${main_path}/usr/lib/rpm/macros.d
-    for i in macros.php81-pear macros.php81-php ;do
+    for i in macros.${src_name}-pear macros.${src_name}-php ;do
         sed -i 's:/etc/opt/remi/'${src_name}':'${main_path}'/etc:g' ${i}
 	sed -i 's:/opt/remi/'${src_name}'/root/usr:'${main_path}'/usr:g' ${i}
 	sed -i 's:/var/opt/remi/'${src_name}':'${main_path}'/var:g' ${i}
