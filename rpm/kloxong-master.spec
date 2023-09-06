@@ -33,7 +33,7 @@
 Name: %{productname}
 Summary: Kloxo Next Generation web panel
 Version: 0.1.3
-Release: 6
+Release: 7
 #Release: beta.%{build_timestamp}
 License: GPL
 Group: Applications/Internet
@@ -169,6 +169,9 @@ EOF
 
 
 %changelog
+* Wed Sep 6 2023 John Parnell Pierce <john@luckytanuki.com> - 0.1.3-7
+- Fix broken paths for fcgi handler
+
 * Tue Sep 5 2023 John Parnell Pierce <john@luckytanuki.com> - 0.1.3-6
 - adjust excluded php packages
 - ensure mysql modules are active

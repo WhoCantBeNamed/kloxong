@@ -8239,6 +8239,24 @@ function ipv6_expand($ip)
 	return $ip;
 }
 
+function getBranchPhpList()
+{
+	$d = glob("/opt/*s/usr/bin/php");
+
+	if (empty($d)) {
+		return array();
+	}
+
+	foreach ($d as $k => $v) {
+		$e = str_replace('/opt/', '', $v);
+		$e = str_replace('/usr/bin/php', '', $e);
+		$f[] = $e;
+	}
+
+	return $f;
+}
+
+
 function getMultiplePhpList()
 {
 	$d = glob("/opt/*m/usr/bin/php");

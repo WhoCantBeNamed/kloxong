@@ -277,6 +277,9 @@ else
 
 	sed -i 's:/var/log/php-error.log:/usr/local/lxlabs/kloxo/log/php-error.log:' ${main_path}/custom/php-fpm.ini
 	sed -i 's:/var/log/php-error.log:/usr/local/lxlabs/kloxo/log/php-error.log:' ${main_path}/custom/php.ini
+
+	ln -sf ${main_path} /opt/php
+
 fi
 
 x="-- Processing for 'php-cgi.sh/php-cli.sh/php-fpm.sh/php-ls.sh'"
