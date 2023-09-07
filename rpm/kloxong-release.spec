@@ -349,7 +349,7 @@ install -m 755 kloxong.repo %{buildroot}%{_sysconfdir}/yum.repos.d/kloxong.repo
 %{_sysconfdir}/yum.repos.d/kloxong.repo
 
 %changelog
-* Thu Sep  2023 John Parnell Pierce <john@luckytanuki.com> - 0.1.1-9
+* Thu Sep 7 2023 John Parnell Pierce <john@luckytanuki.com> - 0.1.1-9
 - add missing php excludes for webtastic
 
 * Tue Sep 5 2023 John Parnell Pierce <john@luckytanuki.com> - 0.1.1-8
