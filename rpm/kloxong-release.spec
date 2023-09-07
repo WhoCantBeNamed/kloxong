@@ -3,7 +3,7 @@
 Summary: KloxoNG release file and package configuration
 Name: kloxong-release
 Version: 0.1.1
-Release: 8
+Release: 9
 License: AGPLV3
 Group: System Environment/Base
 URL: http://kloxong.org/
@@ -90,7 +90,7 @@ mirrorlist=http://cdn.remirepo.net/enterprise/\$releasever/remi/mirror
 gpgcheck=0
 enabled=1
 #includepkgs=php-ffmpeg php-ioncube-loader
-exclude= php5* php7* php80* php-* mysql5* mysql56*  mariadb* postfix32u*
+exclude=php5* php7* php80* php-* mysql5* mysql56*  mariadb* postfix32u*
 
 
 
@@ -287,7 +287,7 @@ name=KloxoNG - Webtatic for CentOS \$releasever - \$basearch
 mirrorlist=http://mirror.webtatic.com/yum/el\$releasever/\$basearch/mirrorlist
 enabled=1
 gpgcheck=0
-exclude=mysql* nginx*
+exclude=mysql* nginx* php55* php56* php7*
 
 [kloxong-webtatic-archive]
 name=KloxoNG - Webtatic for CentOS \$releasever Archive - \$basearch
@@ -349,6 +349,9 @@ install -m 755 kloxong.repo %{buildroot}%{_sysconfdir}/yum.repos.d/kloxong.repo
 %{_sysconfdir}/yum.repos.d/kloxong.repo
 
 %changelog
+* Thu Sep  2023 John Parnell Pierce <john@luckytanuki.com> - 0.1.1-9
+- add missing php excludes for webtastic
+
 * Tue Sep 5 2023 John Parnell Pierce <john@luckytanuki.com> - 0.1.1-8
 - add excludes for conflicting php versions
 
