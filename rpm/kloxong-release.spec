@@ -3,7 +3,7 @@
 Summary: KloxoNG release file and package configuration
 Name: kloxong-release
 Version: 0.1.1
-Release: 9
+Release: 10
 License: AGPLV3
 Group: System Environment/Base
 URL: http://kloxong.org/
@@ -135,8 +135,8 @@ gpgcheck=0
 # for mariadb
 [kloxong-mariadb]
 name=KloxoNG - mariadb repo
-#baseurl=http://yum.mariadb.org/10.5/centos/\$releasever/\$basearch/
-baseurl=https://dlm.mariadb.com/repo/mariadb-server/10.2/yum/centos/\$releasever/\$basearch
+baseurl=http://yum.mariadb.org/10.5/centos/\$releasever/\$basearch/
+#baseurl=https://dlm.mariadb.com/repo/mariadb-server/10.2/yum/centos/\$releasever/\$basearch
 enabled=1
 gpgcheck=0
 
@@ -349,6 +349,9 @@ install -m 755 kloxong.repo %{buildroot}%{_sysconfdir}/yum.repos.d/kloxong.repo
 %{_sysconfdir}/yum.repos.d/kloxong.repo
 
 %changelog
+* Wed Sep 13 2023 John Parnell Pierce <john@luckytanuki.com> - 0.1.1-10
+- go back to MariaDB 10.5
+
 * Thu Sep 7 2023 John Parnell Pierce <john@luckytanuki.com> - 0.1.1-9
 - add missing php excludes for webtastic
 
