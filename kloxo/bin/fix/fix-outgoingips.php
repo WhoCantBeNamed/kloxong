@@ -24,7 +24,7 @@ if (file_exists($flgfile)) {
 	$ipsmap = file($flgfile);
 	foreach($ipsmap as $iprow) {
 		$ips = explode(':',$iprow);
-		$ipmap[$ips[0]] = $ips[1];
+		$ipmap[$ips[0]] = trim($ips[1]);
 	}
 	if(empty($ipmap)){
 		$process=0;
